@@ -17,8 +17,8 @@ const Projects = styled.div`
 `
 
 const Project = styled.div`
-  height: 290px;
-  width: 290px;
+  height: 250px;
+  width: 250px;
   margin: 10px 10px 10px 10px;
   text-align: center;
 `
