@@ -2,7 +2,7 @@ import React from 'react';
 // import Navigation from '../components/Navigation';
 import Header from '../components/Header';
 import Features from '../components/Features';
-import Footer from "../components/Footer"
+// import Footer from "../components/Footer"
 import SEO from '../components/seo';
 
 class BlogIndex extends React.Component {
@@ -16,7 +16,7 @@ class BlogIndex extends React.Component {
         {/* <Navigation /> */}
         <Header />
         <Features />
-        <Footer />
+        {/* <Footer /> */}
       </React.Fragment>
     )
   }

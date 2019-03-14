@@ -33,7 +33,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
-    
+   
     posts
       // .filter(post => post.fields.slug.startsWith('/blog/'))
       .forEach((post, index) => {

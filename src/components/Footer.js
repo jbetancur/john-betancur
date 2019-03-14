@@ -22,9 +22,6 @@ const Footer = () => {
           author
           description
           footnote
-          social {
-            twitter
-          }
         }
       }
     }

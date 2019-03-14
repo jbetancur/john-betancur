@@ -6,16 +6,27 @@ module.exports = {
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     footnote: `johnbetancur.com`,
     social: {
-      twitter: `@johnnyazee`,
+      twitter: {
+        url: `https://twitter.com/johnnyazee`,
+        title: `@johnnyazee`,
+      },
+      github: {
+        url: `https://github.com/jbetancur`,
+        title: `jbetancur`,
+      },
+      linkedin: {
+        url: 'https://www.linkedin.com/in/johnbetancur/',
+        title: 'johnbetancur',
+      },
     },
     routes: [
       {
-        title: "Home",
-        url: "/",
+        title: 'Home',
+        url: '/',
       },
       {
-        title: "Resume",
-        url: "/resume",
+        title: 'Resume',
+        url: '/resume',
       },
     ],
   },
@@ -40,13 +51,6 @@ module.exports = {
       options: {
         path: `${__dirname}/content/features`,
         name: `features`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/content/resume`,
-        name: `resume`,
       },
     },
     {

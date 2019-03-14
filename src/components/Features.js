@@ -27,17 +27,17 @@ const FeatureName = styled.div`
   line-height: 45px;
 `;
 
-const FeatureDescription = styled.div`
-  margin: 9px 18px 0;
-  font-size: 20px;
-  max-width: 100%;
-`;
+// const FeatureDescription = styled.div`
+//   margin: 9px 18px 0;
+//   font-size: 20px;
+//   max-width: 100%;
+// `;
 
-const FeatureFooter = styled.footer`
-  margin: 72px 10px 0;
-  font-size: 20px;
-  text-align: center;
-`;
+// const FeatureFooter = styled.footer`
+//   margin: 72px 10px 0;
+//   font-size: 20px;
+//   text-align: center;
+// `;
 
 const Img = styled.img`
   border: 8px solid #009edc;
