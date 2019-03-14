@@ -24,7 +24,7 @@ const Avatar = styled(Image)`
   flex-shrink: 0;
 `
 
-const Title = styled.h1`
+const Title = styled.div`
   margin: 27px 10px;
   font-size: 50px;
   text-transform: uppercase;
