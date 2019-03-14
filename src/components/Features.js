@@ -11,7 +11,7 @@ const Features = styled.div`
   justify-content: center;
   padding: 99px 0 99px 0;
   color: #fff;
-  background-color: #009edc; 
+  background-color: #333; 
 `;
 
 const Feature = styled.div`
@@ -40,9 +40,8 @@ const FeatureName = styled.div`
 // `;
 
 const Img = styled.img`
-  border: 8px solid #009edc;
-  height: 128px;
-  width: 128px;
+  height: 164px;
+  width: 164px;
   flex-shrink: 0;
 `
 

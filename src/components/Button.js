@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const Button = styled.button`
+const e = React.createElement;
+
+const Button = styled(({ tag, children, ...props }) => e(tag, props, children))`
   display: inline-block;
   padding: 0 16px 0 16px;
   text-align: center;
@@ -13,12 +17,20 @@ const Button = styled.button`
   text-decoration: none;
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: 0.1s ease-in;
+  transition: all 0.2s ease-in;
   outline: none;
 
   &:hover {
-    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 6px 6px 0 rgba(0, 0, 0, 0.4);
   }
 `
+
+Button.propTypes = {
+  tag: PropTypes.string,
+}
+
+Button.defaultProps = {
+  tag: 'button',
+};
 
 export default Button;

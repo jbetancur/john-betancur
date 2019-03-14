@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import Button from './Button';
+import ALink from './ALink';
 import { FaTwitterSquare } from "react-icons/fa"
 import { FaGithub } from "react-icons/fa"
 import { FaLinkedinIn } from 'react-icons/fa'
@@ -47,25 +48,6 @@ const Links = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 16px;
-`
-
-const ALink = styled.a`
-  color: #fff;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  box-shadow: none;
-  margin: 5px;
-  flex: 1 0 10%;
-
-  span {
-    padding: 0 8px 0 8px;
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 const Header = () => {
