@@ -15,8 +15,6 @@ const HeaderStyle = styled.div`
   justify-content: center;
   padding: 99px 0;
   color: #fff;
-  /* background-color: #0c7eaf; */
-  /* background-image: radial-gradient(#009edc, #0c7eaf); */
   background-image: radial-gradient(rgb(0, 158, 220), rgb(12, 126, 175));
   height: 100vh;
 `
@@ -26,11 +24,15 @@ const Avatar = styled(Image)`
   flex-shrink: 0;
 `
 
-const Title = styled.div`
+const Title = styled.h1`
   margin: 27px 10px;
   font-size: 50px;
   text-transform: uppercase;
-`;
+
+  @media screen and (max-width: 600px) {
+    font-size: 42px;
+  }
+`
 
 const Subtitle = styled.div`
   margin: 27px 10px;
@@ -39,12 +41,23 @@ const Subtitle = styled.div`
   max-width: 599px;
 `
 
+const Links = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px;
+`
+
 const ALink = styled.a`
   color: #fff;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
   text-decoration: none;
   box-shadow: none;
+  margin: 5px;
+  flex: 1 0 10%;
 
   span {
     padding: 0 8px 0 8px;
@@ -107,7 +120,7 @@ const Header = () => {
         <Button>Download Resume</Button>
       </form>
       <Subtitle>{description}</Subtitle>
-      <div>
+      <Links>
         <ALink href={social.github.url} target="_blank">
           <FaGithub size={24} />
           <span>{social.github.title}</span>
@@ -120,7 +133,7 @@ const Header = () => {
           <FaLinkedinIn size={24} />
           <span>{social.linkedin.title}</span>
         </ALink>
-      </div>
+      </Links>
     </HeaderStyle>
   )
 };
