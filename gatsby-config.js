@@ -1,14 +1,26 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: `Kyle Mathews`,
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    title: `John Betancur`,
+    author: `John Betancur`,
+    description: `I'm a seasoned software engineer and problem solver with a passion for front end development.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    footnote: `johnbetancur.com`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `@johnnyazee`,
     },
+    routes: [
+      {
+        title: "Home",
+        url: "/",
+      },
+      {
+        title: "Resume",
+        url: "/resume",
+      },
+    ],
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -21,6 +33,20 @@ module.exports = {
       options: {
         path: `${__dirname}/content/assets`,
         name: `assets`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/features`,
+        name: `features`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/resume`,
+        name: `resume`,
       },
     },
     {
@@ -72,6 +98,21 @@ module.exports = {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      options: {
+        fonts: [
+          {
+            family: `Exo 2`,
+            subsets: [`latin`],
+          },
+          {
+            family: `Exo 2`,
+            variants: [`400`, `700`],
+          },
+        ],
       },
     },
   ],
