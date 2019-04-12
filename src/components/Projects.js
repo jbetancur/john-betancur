@@ -23,9 +23,13 @@ const Projects = styled.div`
 `
 
 const Project = styled.div`
-  width: 250px;
+  width: 300px;
   margin: 10px 10px 10px 10px;
   text-align: center;
+
+  a[role=button] {
+    margin: 0 5px 0 5px;
+  }
 `
 
 const ProjectName = styled(ALink)`
@@ -59,6 +63,7 @@ const ProjectSection = () => {
             url
             demo
             demoTitle
+            source
             image {
               publicURL
             }
@@ -84,7 +89,8 @@ const ProjectSection = () => {
               {project.title}
             </ProjectName>
             <ProjectDescription>{project.description}</ProjectDescription>
-            {project.demo && <Button tag="a" href={project.demo} target="_blank">{project.demoTitle}</Button>}
+            {project.demo && <Button tag="a" role="button" href={project.demo} target="_blank">{project.demoTitle}</Button>}
+            {project.source && <Button tag="a" role="button" href={project.source} target="_blank">Source</Button>}
           </Project>
         ))}
       </Projects>

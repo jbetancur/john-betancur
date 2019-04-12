@@ -98,10 +98,10 @@ const Header = () => {
 
   const handleScroll = () => {
     const scrollTop = document.documentElement.scrollTop;
-    const offset = 100;
+    const offset = 50;
 
     if (scrollTop > offset) {
-      setTheta(scrollTop - offset);
+      setTheta((scrollTop - offset) / .8);
     } else {
       setTheta(0);
     }
