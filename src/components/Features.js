@@ -1,6 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from 'gatsby';
+import SectionTitle from './SectionTitle';
+
+const Section = styled.div`
+  padding: 0 0 99px 0;
+  height: 100%;
+  color: #fff;
+  background-color: #333;
+  text-align: center;
+`;
 
 const Features = styled.div`
   position: relative;
@@ -9,9 +18,6 @@ const Features = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 99px 0 99px 0;
-  color: #fff;
-  background-color: #333; 
 `;
 
 const Feature = styled.div`
@@ -66,16 +72,21 @@ const FeatureSection = () => {
   const { frontmatter } = markdownRemark
 
   return (
-    <Features>
-      {frontmatter.features.map(feature => (
-        <Feature key={feature.title}>
-          <Img src={feature.image.publicURL} alt={feature.title} />
-          <FeatureName>{feature.title}</FeatureName>
-          {/* <FeatureDescription>{feature.description}</FeatureDescription> */}
-        </Feature>
-      ))}
-      {/* <FeatureFooter>check me out at g</FeatureFooter> */}
-    </Features>
+    <Section>
+      <SectionTitle>
+        UI Stack
+      </SectionTitle>
+      <Features>
+        {frontmatter.features.map(feature => (
+          <Feature key={feature.title}>
+            <Img src={feature.image.publicURL} alt={feature.title} />
+            <FeatureName>{feature.title}</FeatureName>
+            {/* <FeatureDescription>{feature.description}</FeatureDescription> */}
+          </Feature>
+        ))}
+        {/* <FeatureFooter>check me out at g</FeatureFooter> */}
+      </Features>
+    </Section>
   )
 };
 

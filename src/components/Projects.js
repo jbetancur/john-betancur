@@ -3,6 +3,15 @@ import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import ALink from './ALink';
 import Button from './Button';
+import SectionTitle from './SectionTitle';
+
+const Section = styled.div`
+  padding: 0 0 99px 0;
+  height: 100%;
+  color: #fff;
+  background-color: #009edc; 
+  text-align: center;
+`;
 
 const Projects = styled.div`
   position: relative;
@@ -11,13 +20,9 @@ const Projects = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 99px 0 99px 0;
-  color: #fff;
-  background-color: #009edc; 
 `
 
 const Project = styled.div`
-  height: 250px;
   width: 250px;
   margin: 10px 10px 10px 10px;
   text-align: center;
@@ -35,6 +40,14 @@ const ProjectDescription = styled.div`
   max-width: 100%;
 `
 
+const Img = styled.img`
+  height: 164px;
+  width: 164px;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+`
+
 const ProjectSection = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -45,6 +58,10 @@ const ProjectSection = () => {
             description
             url
             demo
+            demoTitle
+            image {
+              publicURL
+            }
           }
         }
       }
@@ -55,17 +72,23 @@ const ProjectSection = () => {
   const { frontmatter } = markdownRemark
 
   return (
-    <Projects>
-      {frontmatter.projects.map(project => (
-        <Project key={project.title}>
-          <ProjectName href={project.url} target="_blank">
-            {project.title}
-          </ProjectName>
-          <ProjectDescription>{project.description}</ProjectDescription>
-          <Button tag="a" href={project.demo} target="_blank">Live Demo</Button>
-        </Project>
-      ))}
-    </Projects>
+    <Section>
+        <SectionTitle>
+          Projects
+        </SectionTitle>
+      <Projects>
+        {frontmatter.projects.map(project => (
+          <Project key={project.title}>
+            {project.image && <Img src={project.image.publicURL} alt={project.title} />}
+            <ProjectName href={project.url} target="_blank">
+              {project.title}
+            </ProjectName>
+            <ProjectDescription>{project.description}</ProjectDescription>
+            {project.demo && <Button tag="a" href={project.demo} target="_blank">{project.demoTitle}</Button>}
+          </Project>
+        ))}
+      </Projects>
+    </Section>
   )
 };
 

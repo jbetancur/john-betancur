@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
@@ -19,10 +19,12 @@ const HeaderStyle = styled.div`
   background-image: radial-gradient(rgb(0, 158, 220), rgb(12, 126, 175));
   height: 100vh;
 `
+
 const Avatar = styled(Image)`
   border: 8px solid #0c7eaf;
   border-radius: 50%;
   flex-shrink: 0;
+  transform: rotate(${props => props.rotate}deg);
 `
 
 const Title = styled.div`
@@ -50,53 +52,81 @@ const Links = styled.div`
   padding: 16px;
 `
 
-const Header = () => {
-  const data = useStaticQuery(graphql`
-    query HeaderQuery {
-      allFile(filter: { extension: { eq: "pdf" } }) {
-        edges {
-          node {
-            publicURL
-          }
+const query = graphql`
+  query HeaderQuery {
+    allFile(filter: { extension: { eq: "pdf" } }) {
+      edges {
+        node {
+          publicURL
         }
       }
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
-        childImageSharp {
-          fixed(width: 196, height: 196) {
-            ...GatsbyImageSharpFixed
-          }
+    }
+    avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+      childImageSharp {
+        fixed(width: 196, height: 196) {
+          ...GatsbyImageSharpFixed
         }
       }
-      site {
-        siteMetadata {
-          title
-          author
-          description
-          social {
-            twitter {
-              url
-              title
-            }
-            github {
-              url
-              title
-            }
-            linkedin {
-              url
-              title
-            }
+    }
+    site {
+      siteMetadata {
+        title
+        author
+        description
+        social {
+          twitter {
+            url
+            title
+          }
+          github {
+            url
+            title
+          }
+          linkedin {
+            url
+            title
           }
         }
       }
     }
-  `)
+  }
+`
+
+const Header = () => {
+  const data = useStaticQuery(query)
+  const [theta, setTheta] = useState(false);
+
+  const handleScroll = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const offset = 100;
+
+    if (scrollTop > offset) {
+      setTheta(scrollTop - offset);
+    } else {
+      setTheta(0);
+    }
+  };
   
-  const { title, author, description, social } = data.site.siteMetadata
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, []) // runs once
+
+  const {
+    title,
+    author,
+    description,
+    social,
+  } = data.site.siteMetadata
   const { publicURL } = data.allFile.edges[0].node
 
   return (
     <HeaderStyle>
-      <Avatar fixed={data.avatar.childImageSharp.fixed} alt={author} />
+      <Avatar
+        fixed={data.avatar.childImageSharp.fixed}
+        alt={author}
+        rotate={theta}
+      />
       <Title>{title}</Title>
       <form method="get" action={publicURL}>
         <Button>Download Resume</Button>

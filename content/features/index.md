@@ -9,7 +9,10 @@ features:
   - title: Node.js
     description: awesome!
     image: nodejs-icon.png
-  # - title: Styled Components
+  - title: Styled Components
+    description: awesome!
+    image: styled-components-icon.png
+  # - title: Go Lang
   #   description: awesome!
-  #   image: styled-components-icon.png
+  #   image: golang.png
 ---
