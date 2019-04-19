@@ -45,8 +45,8 @@ const ProjectDescription = styled.div`
 `
 
 const Img = styled.img`
-  height: 164px;
-  width: 164px;
+  height: 128px;
+  width: 128px;
   flex-shrink: 0;
   padding: 0;
   margin: 0;
@@ -57,6 +57,7 @@ const ProjectSection = () => {
     query {
       markdownRemark(fileAbsolutePath: { regex: "/(projects)/.*.md$/" }) {
         frontmatter {
+          title
           projects {
             title
             description
@@ -79,7 +80,7 @@ const ProjectSection = () => {
   return (
     <Section>
         <SectionTitle>
-          Projects
+          {frontmatter.title}
         </SectionTitle>
       <Projects>
         {frontmatter.projects.map(project => (

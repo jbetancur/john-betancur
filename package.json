@@ -6,7 +6,7 @@
   "author": "John Betancur<johnnyazee@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.0",
-    "gatsby": "^2.1.31",
+    "gatsby": "^2.3.25",
     "gatsby-image": "^2.0.33",
     "gatsby-plugin-feed": "^2.0.15",
     "gatsby-plugin-google-analytics": "^2.0.17",
@@ -30,7 +30,7 @@
     "react-dom": "^16.8.6",
     "react-flexybox": "^2.5.0",
     "react-helmet": "^5.2.0",
-    "react-icons": "^3.5.0",
+    "react-icons": "^3.6.1",
     "react-typography": "^0.16.19",
     "styled-components": "^4.2.0",
     "typeface-merriweather": "0.0.72",
@@ -39,7 +39,7 @@
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
-    "prettier": "^1.16.4"
+    "prettier": "^1.17.0"
   },
   "keywords": [
     "john betancur"

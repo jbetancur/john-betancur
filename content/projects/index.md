@@ -1,4 +1,5 @@
 ---
+title: Recent Projects
 projects:
   - title: React Data Table
     description: A simple, sortable, and flexible table library

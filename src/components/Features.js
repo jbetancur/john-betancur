@@ -21,14 +21,14 @@ const Features = styled.div`
 `;
 
 const Feature = styled.div`
-  height: 290px;
-  width: 290px;
-  margin: 10px 10px 10px 10px;
+  height: 200px;
+  width: 200px;
+  margin: 20px;
   text-align: center;
 `;
 
 const FeatureName = styled.div`
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 400;
   line-height: 45px;
 `;
@@ -46,8 +46,8 @@ const FeatureName = styled.div`
 // `;
 
 const Img = styled.img`
-  height: 164px;
-  width: 164px;
+  height: 96px;
+  width: 96px;
   flex-shrink: 0;
 `
 
@@ -56,6 +56,7 @@ const FeatureSection = () => {
     query {
       markdownRemark(fileAbsolutePath: { regex: "/(features)/.*.md$/" }) {
         frontmatter {
+          title
           features {
             title
             description
@@ -74,7 +75,7 @@ const FeatureSection = () => {
   return (
     <Section>
       <SectionTitle>
-        UI Stack
+        {frontmatter.title}
       </SectionTitle>
       <Features>
         {frontmatter.features.map(feature => (

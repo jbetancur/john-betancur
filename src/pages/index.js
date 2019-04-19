@@ -12,7 +12,7 @@ class BlogIndex extends React.Component {
       <React.Fragment>
         <SEO
           title="John Betancur"
-          keywords={[`blog`, `developer`, `javascript`, `react`, `resume`]}
+          keywords={['john betancur', `blog`, `developer`, `javascript`, `react`, `resume`, 'redux', 'styled-components', 'node.js', 'reactjs']}
         />
         {/* <Navigation /> */}
         <Header />

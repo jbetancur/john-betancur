@@ -4,9 +4,9 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 import Button from './Button';
 import ALink from './ALink';
-import { FaTwitterSquare } from "react-icons/fa"
-import { FaGithub } from "react-icons/fa"
-import { FaLinkedinIn } from 'react-icons/fa'
+import { FaTwitterSquare } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedinIn } from 'react-icons/fa';
 
 const HeaderStyle = styled.div`
   position: relative;
@@ -16,7 +16,7 @@ const HeaderStyle = styled.div`
   justify-content: center;
   padding: 99px 0;
   color: #fff;
-  background-image: radial-gradient(rgb(0, 158, 220), rgb(12, 126, 175));
+  background-image: radial-gradient(#53AAD9, rgb(12, 126, 175));
   height: 100vh;
 `
 
@@ -38,10 +38,14 @@ const Title = styled.div`
 `
 
 const Subtitle = styled.div`
-  margin: 27px 10px;
+  margin: 27px 0;
   text-align: center;
   font-size: 20px;
-  max-width: 599px;
+  width: 50%;
+
+  @media (max-width: 599px) {
+    width: 90%;
+  }
 `
 
 const Links = styled.div`
@@ -134,16 +138,16 @@ const Header = () => {
       <Subtitle>{description}</Subtitle>
       <Links>
         <ALink href={social.github.url} target="_blank">
-          <FaGithub size={24} />
-          <span>{social.github.title}</span>
-        </ALink>
-        <ALink href={social.twitter.url} target="_blank">
-          <FaTwitterSquare size={24} />
-          <span>{social.twitter.title}</span>
+          <FaGithub size={42} />
+          {/* <span>{social.github.title}</span> */}
         </ALink>
         <ALink href={social.linkedin.url} target="_blank">
-          <FaLinkedinIn size={24} />
-          <span>{social.linkedin.title}</span>
+          <FaLinkedinIn size={42} />
+          {/* <span>{social.linkedin.title}</span> */}
+        </ALink>
+        <ALink href={social.twitter.url} target="_blank">
+          <FaTwitterSquare size={42} />
+          {/* <span>{social.twitter.title}</span> */}
         </ALink>
       </Links>
     </HeaderStyle>
