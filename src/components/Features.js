@@ -21,14 +21,14 @@ const Features = styled.div`
 `;
 
 const Feature = styled.div`
-  height: 200px;
-  width: 200px;
+  height: 128px;
+  width: 128px;
   margin: 20px;
   text-align: center;
 `;
 
 const FeatureName = styled.div`
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 45px;
 `;
@@ -46,9 +46,10 @@ const FeatureName = styled.div`
 // `;
 
 const Img = styled.img`
-  height: 96px;
-  width: 96px;
+  height: 64px;
+  max-width: 128px;
   flex-shrink: 0;
+  margin: 0;
 `
 
 const FeatureSection = () => {

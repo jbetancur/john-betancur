@@ -25,7 +25,7 @@ features:
   - title: Jest Testing
     description: awesome!
     image: jest.png
-  # - title: Go Lang
-  #   description: awesome!
-  #   image: golang.png
+  - title: Go Lang
+    description: awesome!
+    image: golang.png
 ---
