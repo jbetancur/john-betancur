@@ -21,16 +21,17 @@ module.exports = {
     },
     routes: [
       {
-        title: 'Home',
-        url: '/',
+        title: 'About',
+        url: '/about',
       },
       {
         title: 'Blog',
-        url: '/blog',
+        url: '/',
       },
     ],
   },
   plugins: [
+    `gatsby-plugin-sass`,
     `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -74,7 +75,34 @@ module.exports = {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {},
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              showLineNumbers: true,
+              noInlineHighlight: false,
+              languageExtensions: [
+                {
+                  language: "superscript",
+                  extend: "javascript",
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
+                  },
+                },
+              ],
+              prompt: {
+                user: "root",
+                host: "localhost",
+                global: false,
+              },
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],

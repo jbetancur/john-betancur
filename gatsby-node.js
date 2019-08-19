@@ -9,7 +9,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          filter: { fields: { slug: { ne: null } } }
+          filter: { fields: { slug: { ne: null } }, fileAbsolutePath: {glob: "**/blog/**"} }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -28,21 +28,20 @@ exports.createPages = ({ graphql, actions }) => {
     `
   ).then(result => {
     if (result.errors) {
-      throw result.errors 
+      throw result.errors
     }
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
-   
+
     posts
-      // .filter(post => post.fields.slug.startsWith('/blog/'))
       .forEach((post, index) => {
         const previous =
           index === posts.length - 1 ? null : posts[index + 1].node
         const next = index === 0 ? null : posts[index - 1].node
 
         createPage({
-          path: `/blog/${post.node.fields.slug}`,
+          path: post.node.fields.slug,
           component: blogPost,
           context: {
             slug: post.node.fields.slug,

@@ -1,27 +1,75 @@
-import React from 'react';
-// import Navigation from '../components/Navigation';
-import Header from '../components/Header';
-import Features from '../components/Features';
-import Projects from '../components/Projects'
-// import Footer from "../components/Footer"
-import SEO from '../components/seo';
+import React from "react"
+import { Link, graphql } from "gatsby"
+
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
   render() {
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const posts = data.allMarkdownRemark.edges
+
     return (
-      <React.Fragment>
+      <Layout location={this.props.location} title={siteTitle}>
         <SEO
-          title="John Betancur"
-          keywords={['john betancur', `blog`, `developer`, `javascript`, `react`, `resume`, 'redux', 'styled-components', 'node.js', 'reactjs']}
+          title="All posts"
+          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
-        {/* <Navigation /> */}
-        <Header />
-        <Projects />
-        <Features />
-        {/* <Footer /> */}
-      </React.Fragment>
+        {posts.map(({ node }) => {
+          const title = node.frontmatter.title || node.fields.slug
+          return (
+            <div key={node.fields.slug}>
+              <h3
+                style={{
+                  marginBottom: rhythm(1 / 4),
+                }}
+              >
+                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  {title}
+                </Link>
+              </h3>
+              <small>{node.frontmatter.date}</small>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: node.frontmatter.description || node.excerpt,
+                }}
+              />
+            </div>
+          )
+        })}
+      </Layout>
     )
   }
 }
 
-export default BlogIndex
+export default BlogIndex;
+
+export const pageQuery = graphql`
+         query {
+           site {
+             siteMetadata {
+               title
+             }
+           }
+           allMarkdownRemark(
+             sort: { fields: [frontmatter___date], order: DESC },
+             filter: {fileAbsolutePath: {glob: "**/blog/**"}}
+           ) {
+             edges {
+               node {
+                 excerpt
+                 fields {
+                   slug
+                 }
+                 frontmatter {
+                   date(formatString: "MMMM DD, YYYY")
+                   title
+                   description
+                 }
+               }
+             }
+           }
+         }
+       `
