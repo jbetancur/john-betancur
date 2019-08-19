@@ -6,7 +6,7 @@ description: While pre-optimization can be the root of all evil there are some b
 
 While pre-optimization can be the root of all evil there are some best practices you can adhere to that will ensure your React components are performing at their best.
 
-This weeks topic will is around using  `React.memo` or `React.PureComponent` for cases where you need to limit re-renders on your components, specifically as it relates to passing props. I was pretty tripped up on this while I was while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component) which uses has a very deep component tree, rows and cells.
+This weeks topic will is around using  `React.memo` or `React.PureComponent` for cases where you need to limit re-renders on your components, specifically as it relates to passing props. I was pretty tripped up on this while developing [React Data Table](https://github.com/jbetancur/react-data-table-component) which uses has a very deep component tree, rows and cells.
 
 ## Equality & Sameness
 Before we delve further, it's important to first understand how Javascript compares non primitives. Primitives such as strings, numbers and booleans are value based comparisons.
