@@ -23,3 +23,13 @@ body {
 h1, h2, h3, h4 ,h5, h6 {
   font-family: 'Exo 2', sans-serif;
 }
+
+/* general code blocks */
+:not(pre)>code[class*=language-], pre[class*=language-] {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  padding: .2em .4em;
+  color: #24292e;
+}
