@@ -88,12 +88,15 @@ Memoize the `data` object before we pass it to `ExpensiveChild` if your data is 
 
 <iframe src="https://codesandbox.io/embed/re-render-memo-forever-ev7jh?expanddevtools=1&fontsize=14" title="Re-render Memo Fixed" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
+
+Again, it's up to you to determine whether memoization is actually benefiting performance, but in our example let's assume that it is.
+
 ### Outer Scope
-By moving `data` out of the component (in the case of class components out of the render method) so that it is only created once. This is likely to be the solution if your data is static:
+Another way to optimize `data` is by moving the variable declaration outside of the component (in the case of class components out of the render method) so that it is only created once. This is likely to be the solution if your data is static:
 
 <iframe src="https://codesandbox.io/embed/re-render-memo-fixed-nmxxc?expanddevtools=1&fontsize=14" title="Re-render Static Data" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-Keep in mind that with the outer scope solution if you are referencing a function you will still need to memoize it using your own memoize function ot a 3rd party library like `memoize-one`.
+Keep in mind that with the outer scope solution if you are referencing a function you will still need to memoize it using your own memoize function to a 3rd party library like `memoize-one`.
 
 ## Recap
-Now that you've determined that your component requires a conditional re-render we have a solid understanding that when the props we pass are objects, arrays or functions that we must take care not to recreate them every time a render occurs. This will ensure that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
+Now that you've determined that your component requires a conditional re-render we should have a solid understanding that when the props we pass are objects, arrays or functions that we must take care not to recreate them every time a render occurs. This will ensure that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
