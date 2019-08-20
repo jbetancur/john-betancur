@@ -63,7 +63,7 @@ However, we want to limit `ExpensiveChild` to only re-render when it needs to.
 ### React.PureComponent
 By making our class Component a `React.PureComponent` we can have React do some shallow checks for each prop to ensure each prop that is passed is equal. If so, re-rendering is skipped:
 
-<iframe src="https://codesandbox.io/embed/memo-66xl6?expanddevtools=1&fontsize=14" title="PureComponent" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/purecomponent-66xl6?expanddevtools=1&fontsize=14" title="PureComponent" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ### React.memo
 We can do the same thing for a functional component using `React.memo`:
