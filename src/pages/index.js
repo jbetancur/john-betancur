@@ -1,8 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Image from 'gatsby-image'
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
-import Paper from '../components/Paper';
+import Paper from '../components/Paper'
 import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
@@ -29,9 +30,13 @@ class BlogIndex extends React.Component {
               >
 
               {node.frontmatter.image && (
-                <img
-                  src={node.frontmatter.image.publicURL}
+                <Image
+                  fluid={node.frontmatter.image.childImageSharp.fluid}
                   alt={node.frontmatter.title}
+                  fadeIn
+                  style={{
+                    marginBottom: rhythm(1 / 2),
+                  }}
                 />
               )}
 
@@ -84,7 +89,11 @@ export const pageQuery = graphql`
                    title
                    description
                    image {
-                    publicURL
+                    childImageSharp {
+                      fluid {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
                    }
                  }
                }

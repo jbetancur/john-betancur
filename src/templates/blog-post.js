@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import Image from 'gatsby-image'
 import Bio from '../components/Bio';
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
@@ -18,9 +19,13 @@ class BlogPostTemplate extends React.Component {
           description={post.frontmatter.description || post.excerpt}
         />
         {post.frontmatter.image && (
-          <img
-            src={post.frontmatter.image.publicURL}
+          <Image
+            fluid={post.frontmatter.image.childImageSharp.fluid}
             alt={post.frontmatter.title}
+            fadeIn
+            style={{
+              marginBottom: rhythm(1 / 2),
+            }}
           />
         )}
         <h1>{post.frontmatter.title}</h1>
@@ -90,7 +95,11 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
         image {
-          publicURL
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
         }
       }
     }
