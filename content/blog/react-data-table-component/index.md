@@ -1,11 +1,11 @@
 ---
 title: Yet Another React Data Table
 date: "2019-08-09T22:40:32.169Z"
-description: Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand taxonomy of a table.
+description: Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand the taxonomy of html tables.
 image: table.jpg
 ---
 
-Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand taxonomy of a table. What I was really looking for was a table library with a declarative API and with the least amount of cognitive load.
+Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand the taxonomy of html tables. What I was really looking for was a table library with a declarative API and with the least amount of cognitive load.
 
 In my industry I find myself writing a lot of UIs that require tabular views. These UIs are typically developer or infrastructure centric products where it's common to list resources such as: users, virtual machines, CI build status, containers, whatever. Sometimes, I really just need to be able to rapidly prototype a tabular view that has sorting and pagination by default to prove out a concept.
 
