@@ -15,7 +15,7 @@ It's a common misconception that you need to wrap all your components in a `Reac
 A good rule of thumb is components that contain little or basic logic are better off re-rendering all the live long day whereas components with expensive calculations should typically only re-render when their props or state actually change. This is where `React.PureComponent` or `React.memo` are useful when used correctly.
 
 ## Equality & Sameness
-Before we delve further, it's important to reiterate how Javascript compares non primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null and are considered value based comparisons - meaning that we compare the **values**.
+Before we delve further, it's important to reiterate how Javascript performs comparisons. Let's start with primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null and are considered value based comparisons. Therefore comparing primitive values to themselves will result in a true condition:
 
 ```js
 'hello' === 'hello' // true
@@ -23,7 +23,7 @@ Before we delve further, it's important to reiterate how Javascript compares non
 true === true // true
 ```
 
-When it comes to objects things are different. Instead of value comparison objects use object reference for comparison. Note that in Javascript arrays and functions are objects too!
+When it comes to objects things are different. Instead of value comparison, Javascript uses object reference instead. Note that in Javascript arrays and functions are objects too!
 
 ```js
 {} === {} // false
