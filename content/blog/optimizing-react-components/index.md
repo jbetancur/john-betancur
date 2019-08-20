@@ -45,7 +45,7 @@ func === func // true
 
 So, wait... why does `{} === {} = false` but `obj === obj = true`?
 
-Another way to word it is that `{}` is a different **instance** or reference of `{}`, but `obj` is the same **instance** or reference of `obj` and therefore the former will always be false even if the object contents are the same. If you are thinking about deep objext comparison that's for another post, but the goal here is for you to understand that `{} !== {}`.
+Another way to word it is that `{}` is a different **instance** or reference of `{}`, but `obj` is the same **instance** or reference of `obj` and therefore the former will always be false even if the object contents are the same. If you are thinking about deep object comparison that's for another post, but the goal here is for you to understand that `{} !== {}`.
 
 Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
@@ -54,7 +54,7 @@ Hold onto this tidbit of knowledge as it's going to take us far into making sure
 ## Did Props Really Change?
 This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props as parameters that are called when the component first mounts and subsequently when the state changes from a parent or within the component itself.
 
-Let's start with a simple example. Let's pretend that for whatever reason that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may alreadt know that this is because `setCount` is a request to re-render with the updated `count`:
+Let's start with a simple example. Let's pretend that for whatever reason that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` is a request to re-render with the updated `count`:
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
