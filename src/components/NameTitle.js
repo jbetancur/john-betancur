@@ -16,6 +16,7 @@ const Title = styled.span`
 
 const Avatar = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const AvatarImage = styled(Image)`

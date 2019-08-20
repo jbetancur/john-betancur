@@ -10,7 +10,7 @@ Wordpress2016.overrideThemeStyles = () => {
       boxShadow: `none`,
     },
     'p': {
-      fontSize: '16px',
+      fontSize: '20px',
     }
   }
 }
