@@ -1,10 +1,10 @@
 ---
 title: Optimizing React Components
 date: "2019-08-18T22:40:32.169Z"
-description: While pre-optimization can be the root of all evil there those times when you need to use shallow prop comparisons such as React.memo and React.PureComponent. But what happens when you've done that and your component still re-renders?
+description: While pre-optimization can be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent. But what happens when you've done that and your component still re-renders?
 ---
 
-While pre-optimization can be the root of all evil there those times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) and [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent). But what happens when you've done that and your component still re-renders?
+While pre-optimization can be the root of all evil there are times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) and [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent). But what happens when you've done that and your component still re-renders?
 
 First things first - check that your props are actually "the same". Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Even with `React.memo` the entire React Data Table library would re-render its rows, columns, cells, checkboxes, re-sort etc when it's parent component triggered a re-render.
 
