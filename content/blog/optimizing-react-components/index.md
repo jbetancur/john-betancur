@@ -2,6 +2,7 @@
 title: Optimizing React Components
 date: "2019-08-18T22:40:32.169Z"
 description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent. But what happens when you've done that and your component still re-renders?
+image: tuneup.jpg
 ---
 
 While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) and [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent). But what happens when you've done that and your component still re-renders?

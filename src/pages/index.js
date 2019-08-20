@@ -1,8 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
 import Layout from "../components/Layout"
 import SEO from "../components/Seo"
+import Paper from '../components/Paper';
 import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
@@ -19,25 +19,38 @@ class BlogIndex extends React.Component {
         />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
+
           return (
-            <div key={node.fields.slug}>
-              <h3
+            <Paper key={node.fields.slug}>
+              <h2
                 style={{
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
+
+              {node.frontmatter.image && (
+                <img
+                  src={node.frontmatter.image.publicURL}
+                  alt={node.frontmatter.title}
+                />
+              )}
+
+              <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                {title}
+              </Link>
+              </h2>
+              <small><span role="img" aria-label="date">🕒</span>{node.frontmatter.date} &nbsp; {node.fields.readingTime.text}</small>
               <p
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
                 }}
               />
-            </div>
-          )
+
+              <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                 <p>Read More...</p>
+              </Link>
+            </Paper>
+          );
         })}
       </Layout>
     )
@@ -62,11 +75,17 @@ export const pageQuery = graphql`
                  excerpt
                  fields {
                    slug
+                   readingTime {
+                    text
+                   }
                  }
                  frontmatter {
                    date(formatString: "MMMM DD, YYYY")
                    title
                    description
+                   image {
+                    publicURL
+                   }
                  }
                }
              }

@@ -17,6 +17,12 @@ class BlogPostTemplate extends React.Component {
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
         />
+        {post.frontmatter.image && (
+          <img
+            src={post.frontmatter.image.publicURL}
+            alt={post.frontmatter.title}
+          />
+        )}
         <h1>{post.frontmatter.title}</h1>
         <p
           style={{
@@ -83,6 +89,9 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        image {
+          publicURL
+        }
       }
     }
   }
