@@ -59,7 +59,7 @@ Let's start with a simple example. Let's pretend that for whatever reason that `
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-However, we want to limit `ExpensiveChild` to only re-render when it needs to.
+However, we want to limit `ExpensiveChild` to only re-render when it needs to. Let's go ahead and configure out component to only re-render when its props change.
 
 ### React.PureComponent
 By making our class Component a `React.PureComponent` we can have React do some shallow checks for each prop to ensure each prop that is passed is equal. If so, re-rendering is skipped:
