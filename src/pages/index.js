@@ -17,7 +17,7 @@ class BlogIndex extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO
           title="All posts"
-          keywords={[`blog`, `gatsby`, `javascript`, `react`]}
+          keywords={[`blog`, `javascript`, `react`]}
         />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
