@@ -9,7 +9,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          filter: { fields: { slug: { ne: null } }, fileAbsolutePath: {glob: "**/blog/**"} }
+          filter: { fields: { slug: { ne: null } }, fileAbsolutePath: { glob: "**/blog/**" }, frontmatter: { published: { eq: true } } }
           sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
@@ -20,6 +20,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
               frontmatter {
                 title
+                published
               }
             }
           }

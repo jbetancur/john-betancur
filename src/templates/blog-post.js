@@ -17,8 +17,6 @@ class BlogPostTemplate extends React.Component {
         <SEO
           title={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
-          image={post.frontmatter.image.publicUrl}
-          slug={post.fields.slug}
         />
         {post.frontmatter.image && (
           <Image
@@ -89,20 +87,18 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(
-        fields: { slug: { eq: $slug }}
+      fields: { slug: { eq: $slug } }
+      frontmatter: { published: { eq: true } }
       ) {
       id
       excerpt(pruneLength: 160)
-      fields {
-        slug
-      }
       html
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        published
         image {
-          publicURL
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid
