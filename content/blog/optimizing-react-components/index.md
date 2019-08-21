@@ -44,7 +44,7 @@ const func = () => {}
 func === func // true
 ```
 
-It turns out comparing the same reference results in true, because when comparing `obj` to itself, which refers to the same address in memory.
+It turns out comparing the same reference results in true, because comparing `obj` to itself refers to the same address in memory.
 
 If you're thinking about deep object comparison that's for another post, but know that in addition to checking object references React also does shallow prop checks on objects to determine if the contents are the same. The main takeaway here is for you to understand that `{}` is not equal to `{}`.
 
