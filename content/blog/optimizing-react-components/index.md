@@ -44,7 +44,7 @@ const func = () => {}
 func === func // true
 ```
 
-So... why does `{} === {} = false` but `obj === obj = true`?  Because `{}` is a different **reference** of `{}`, but the `obj` variable that was assigned is the same **reference** to itself. So, comparing the same reference results in true, while comparing different references will result in false. If you are thinking about deep object comparison that's for another post, but the goal here is for you to understand that `{}` is not equal to `{}`.
+It turns out comparing the same reference results in true, while comparing different references will result in false. If you are thinking about deep object comparison that's for another post, but the goal here is for you to understand that `{}` is not equal to `{}`.
 
 Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
