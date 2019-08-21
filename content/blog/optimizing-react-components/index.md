@@ -21,7 +21,7 @@ Before we delve into the solution, it's important to briefly revisit how Javascr
 true === true // true
 ```
 
-Objects are different, however. Instead of value comparison Javascript uses object reference instead:
+Objects are different, however. Instead of value comparison Javascript uses object reference instead. An object reference is pointer to the location of the object in memory, not its value or contents.
 
 *Note that in Javascript arrays and functions are objects too!*
 
@@ -31,7 +31,7 @@ Objects are different, however. Instead of value comparison Javascript uses obje
 (() => {}) === (() => {}) // false
 ```
 
-Why are these false in the example above? Because we're comparing two objects that have **different references**. Let's instead compare the **same object reference** and see what the result is:
+So, because we're comparing two objects that have **different references** in memory the result is false. Let's instead compare the **same object reference** and see what the result is:
 
 ```js
 const obj = {};
@@ -44,14 +44,16 @@ const func = () => {}
 func === func // true
 ```
 
-It turns out comparing the same reference results in true, while comparing different references will result in false. If you are thinking about deep object comparison that's for another post, but the goal here is for you to understand that `{}` is not equal to `{}`.
+It turns out comparing the same reference results in true, because when comparing `obj` to itself, which refers to the same address in memory.
+
+If you're thinking about deep object comparison that's for another post, but know that in addition to checking object references React also does shallow prop checks on objects to determine if the contents are the same. The main takeaway here is for you to understand that `{}` is not equal to `{}`.
 
 Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive.*
 
 ## Are My Component Props Really The Same?
-This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props as parameters that are called when the component first mounts and subsequently when the state changes from a parent or within the component itself. `React.PureComponent` and `React.memo` simply just add an extra step to the rendering process to check if our props did not change and thus return true or false that the function should be called again (component re-render).
+This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props as parameters that are called when the component first mounts and subsequently when the state changes from a parent or within the component itself. `React.PureComponent` and `React.memo` simply just give us an escape hatch to the rendering process to check if our props did not change and thus return true or false if the function (out component) should be called again (re-render).
 
 Let's pretend that for whatever reason that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` is a request to re-render with the updated `count`:
 

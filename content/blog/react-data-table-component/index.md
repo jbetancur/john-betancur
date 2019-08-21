@@ -69,7 +69,7 @@ const MyComponent = () => {
 ```
 
 ### Expandable Rows
-Easy Peazy.
+Easy peazy.
 
 ```js
 const MyComponent = () => (
@@ -84,7 +84,7 @@ const MyComponent = () => (
 ```
 
 ### Pagination
-Pagination party time!
+Party time!
 
 ```js
 const MyComponent = () => (
