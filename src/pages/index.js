@@ -96,6 +96,7 @@ export const pageQuery = graphql`
                    title
                    description
                    image {
+                    publicURL
                     childImageSharp {
                       fluid {
                         ...GatsbyImageSharpFluid

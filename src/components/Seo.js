@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({ description, lang, meta, image, slug, keywords, title }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -31,6 +31,8 @@ function SEO({ description, lang, meta, keywords, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const metaImage = image ? `${site.siteMetadata.siteUrl}/${image}` : null;
+  const url = `${site.siteMetadata.siteUrl}${slug}`;
 
   return (
     <Helmet
@@ -41,12 +43,16 @@ function SEO({ description, lang, meta, keywords, title }) {
       titleTemplate={`%s | ${site.siteMetadata.title}`}
       meta={[
         {
+          property: 'og:url',
+          content: url,
+        },
+        {
           name: `description`,
           content: metaDescription,
         },
         {
-          property: `og:title`,
-          content: title,
+          property: 'og:title',
+          content: title || site.siteMetadata.title,
         },
         {
           property: `og:description`,
@@ -66,13 +72,27 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
         {
           name: `twitter:title`,
-          content: site.siteMetadata.social.twitter.title,
+          content: site.siteMetadata.title,
         },
         {
           name: `twitter:description`,
           content: metaDescription,
         },
       ]
+        .concat(
+          metaImage
+            ? [
+                {
+                  property: 'og:image',
+                  content: metaImage,
+                },
+                {
+                  name: 'twitter:image',
+                  content: metaImage,
+                },
+              ]
+            : []
+        )
         .concat(
           keywords.length > 0
             ? {
@@ -89,6 +109,8 @@ function SEO({ description, lang, meta, keywords, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
+  image: '',
+  slug: '',
   keywords: [],
 }
 
@@ -96,6 +118,8 @@ SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.array,
+  image: PropTypes.string,
+  slug: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
 }
