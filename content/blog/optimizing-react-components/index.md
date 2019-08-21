@@ -60,7 +60,7 @@ Let's pretend that for whatever reason that `ExpensiveChild` is some crazy expen
 However, we want to limit `ExpensiveChild` to only re-render when it needs to. Let's go ahead and configure our component to only re-render when its props change.
 
 ### Using React.PureComponent
-By making our class Component a `React.PureComponent` we can have React do some shallow checks for each prop to ensure each prop that is passed is equal. If so, re-rendering is skipped:
+By making our class Component a `React.PureComponent` we can have React do some shallow checks on our props and detect if they have changes. If the props are all equal, re-rendering is skipped:
 
 <iframe src="https://codesandbox.io/embed/purecomponent-66xl6?expanddevtools=1&fontsize=14" title="PureComponent" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -69,7 +69,7 @@ We can do the same thing for a functional component using `React.memo`:
 
 <iframe src="https://codesandbox.io/embed/re-render-forever-hvsf6?expanddevtools=1&fontsize=14" title="Memo" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-In both examples above you can see that `ExpensiveChild` only renders once on mount, but subsequently is not re-rendered. Under the covers React is performing comparisons on each prop.
+In both examples above you can see that `ExpensiveChild` only renders once on mount, but subsequently is not re-rendered.
 
 Ok, let's throw a wrench into the cogs and also pass an object. For brevity, we are going to stick with the Hooks example:
 
