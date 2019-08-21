@@ -125,7 +125,7 @@ const MyComponent = () => (
 );
 ```
 
-And bunch more...
+And a bunch more...
 
 ## Community
 Whenever I decide to use an open source library one of the first things I check for is community and activity. To my unexpected surprise React Data Table Component is gaining contributions and is already up to 90 something stars and over 3700 weekly downloads.
