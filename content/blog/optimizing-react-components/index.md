@@ -3,16 +3,12 @@ title: Optimizing React Components
 date: "2019-08-18T22:40:32.169Z"
 description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent. But what happens when you've done that and your component still re-renders?
 image: tuneup.jpg
+published: true
 ---
 
 While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) and [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent). But what happens when you've done that and your component still re-renders?
 
-First things first - check that your props are actually "the same". Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite my use of `React.memo` on expensive components the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort when it's parent component triggered a re-render.
-
-## BTW, you may not need React.memo or React.PureComponent
-It's a common misconception that you need to wrap all your components in a `React.PureComponent` or `React.memo` to prevent those evil re-renders. Applying shallow checking in this blind manner may either have no performance impact or it may slow things down depending on how many props you're comparing. Additionally, React performs something called reconciliation where it only compares what changed in your HTML before committing a change to the DOM.
-
-A good rule of thumb is components that contain little or basic logic are better off re-rendering all the live long day whereas components with expensive calculations should typically only re-render when their props or state actually change. This is where `React.PureComponent` or `React.memo` are useful when used correctly.
+The first thing you'll want to check is that the props you are passing to your component are actually "the same". Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite my use of `React.memo` on expensive components the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort when it's parent component triggered a re-render.
 
 ## Equality & Sameness
 Before we delve further, it's important to reiterate how Javascript performs comparisons. Let's start with primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null and are considered value based comparisons. Therefore comparing primitive values to themselves will result in a true condition:

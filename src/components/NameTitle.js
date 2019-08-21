@@ -10,8 +10,11 @@ const Title = styled.span`
   margin: 0;
   font-weight: 500;
   font-size: 24px;
-  line-height: 2;
   color: #FFFFFF;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 
 const Avatar = styled.div`
@@ -53,10 +56,10 @@ function NameTitle() {
 }
 
 const nameTitleQuery = graphql`
-  query NamtTitleQuery {
+  query NameTitleQuery {
     avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
       childImageSharp {
-        fixed(width: 56, height: 56) {
+        fixed(width: 48, height: 48) {
           ...GatsbyImageSharpFixed
         }
       }

@@ -18,6 +18,10 @@ const HeroStyle = styled.div`
   color: #fff;
   background-image: radial-gradient(#53AAD9, rgb(12, 126, 175));
   height: calc(100vh - 72px);
+
+  @media only screen and (max-width: 600px) {
+    height: calc(100vh - 64px);
+  }
 `
 
 const Avatar = styled(Image)`

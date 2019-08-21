@@ -3,6 +3,7 @@ title: Yet Another React Data Table
 date: "2019-08-09T22:40:32.169Z"
 description: Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand the taxonomy of html tables.
 image: table.jpg
+published: true
 ---
 
 Creating yet another React table library came out of necessity while developing a web application for a growing startup. I discovered that while there are some great table libraries out there, most required me to implement basic features such as built in sorting and pagination or to understand the taxonomy of html tables. What I was really looking for was a table library with a declarative API and with the least amount of cognitive load.
