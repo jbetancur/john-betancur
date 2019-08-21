@@ -47,7 +47,7 @@ class BlogIndex extends React.Component {
                   {title}
                 </Link>
                 </h2>
-                <small><span role="img" aria-label="date">🕒</span>{node.frontmatter.date} &nbsp; {node.fields.readingTime.text}</small>
+                <small><span role="img" aria-label="date">🕒 &nbsp;</span>{node.frontmatter.date} &nbsp; {node.fields.readingTime.text}</small>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: node.frontmatter.description || node.excerpt,
