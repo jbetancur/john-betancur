@@ -5,18 +5,18 @@ import NameTitle from "./NameTitle"
 import NavLink from './NavLink';
 
 const HeaderStyle = styled.header`
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   height: 72px;
   background-color: #53AAD9;
-  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.2);
+  ${props => props.shadow && 'box-shadow: 0 4px 2px -2px rgba(0,0,0,0.2)'};
   z-index: 1;
 
   @media only screen and (max-width: 600px) {
-    position: sticky;
-    top: 0;
     height: 64px;
   }
 `;
@@ -31,10 +31,12 @@ const Header = () => {
   return(
     <Location>
       {({ location }) => {
+        const isAboutPage = location.pathname === '/about' || location.pathname === '/about/';
+
         return (
-          <HeaderStyle>
+          <HeaderStyle shadow={!isAboutPage}>
             <NameTitleLink to="/">
-              <NameTitle hideAvatarImage={location.pathname === '/about' || location.pathname === '/about/'} />
+              <NameTitle hideAvatarImage={isAboutPage} />
             </NameTitleLink>
             <div>
               <NavLink to="/">Blog</NavLink>
