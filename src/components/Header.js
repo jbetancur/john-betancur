@@ -12,8 +12,11 @@ const HeaderStyle = styled.header`
   height: 72px;
   background-color: #53AAD9;
   box-shadow: 0 4px 2px -2px rgba(0,0,0,0.2);
+  z-index: 1;
 
   @media only screen and (max-width: 600px) {
+    position: sticky;
+    top: 0;
     height: 64px;
   }
 `;
