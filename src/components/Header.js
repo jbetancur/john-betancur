@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '@reach/router';
+import { Link, Location } from '@reach/router';
 import NameTitle from "./NameTitle"
 import NavLink from './NavLink';
 
@@ -29,15 +29,21 @@ const NameTitleLink = styled(Link)`
 
 const Header = () => {
   return(
-    <HeaderStyle>
-      <NameTitleLink to="/">
-        <NameTitle />
-      </NameTitleLink>
-      <div>
-        <NavLink to="/">Blog</NavLink>
-        <NavLink to="/about">About</NavLink>
-      </div>
-    </HeaderStyle>
+    <Location>
+      {({ location }) => {
+        return (
+          <HeaderStyle>
+            <NameTitleLink to="/">
+              <NameTitle hideAvatarImage={location.pathname === '/about' || location.pathname === '/about/'} />
+            </NameTitleLink>
+            <div>
+              <NavLink to="/">Blog</NavLink>
+              <NavLink to="/about">About</NavLink>
+            </div>
+          </HeaderStyle>
+        );
+      }}
+    </Location>
   );
 };
 

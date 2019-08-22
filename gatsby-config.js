@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `John Betancur`,
     author: `John Betancur`,
-    description: `I'm a seasoned software engineer and problem solver with a passion for front-end development. I want to make a positive difference and work on challenging projects with people that are smarter than me.`,
+    description: `Hello, my name is John Betancur. I'm a seasoned software engineer and problem solver with a passion for front-end development. I want to make a positive difference and work on challenging projects with people that are smarter than me.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     footnote: `johnbetancur.com`,
     social: {

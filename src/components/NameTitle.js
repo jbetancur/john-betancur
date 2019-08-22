@@ -2,7 +2,6 @@ import React from "react"
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
-
 import { rhythm } from '../utils/typography';
 
 const Title = styled.span`
@@ -29,7 +28,7 @@ const AvatarImage = styled(Image)`
   border: 2px solid white;
 `;
 
-function NameTitle() {
+const NameTitle = ({ hideAvatarImage }) => {
   return (
     <StaticQuery
       query={nameTitleQuery}
@@ -38,13 +37,15 @@ function NameTitle() {
 
         return (
           <Avatar>
-            <AvatarImage
-              fixed={data.avatar.childImageSharp.fixed}
-              alt={author}
-              imgStyle={{
-                borderRadius: `50%`,
-              }}
-            />
+            {!hideAvatarImage && (
+              <AvatarImage
+                fixed={data.avatar.childImageSharp.fixed}
+                alt={author}
+                imgStyle={{
+                  borderRadius: `50%`,
+                }}
+              />
+            )}
             <Title>
                {author}
             </Title>

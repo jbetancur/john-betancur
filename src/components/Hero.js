@@ -29,17 +29,18 @@ const Avatar = styled(Image)`
   border-radius: 50%;
   flex-shrink: 0;
   transform: rotate(${props => props.rotate}deg);
-`
-
-const Title = styled.div`
   margin: 27px 10px;
-  font-size: 50px;
-  text-transform: uppercase;
-
-  @media screen and (max-width: 600px) {
-    font-size: 42px;
-  }
 `
+
+// const Title = styled.div`
+//   margin: 27px 10px;
+//   font-size: 50px;
+//   text-transform: uppercase;
+
+//   @media screen and (max-width: 600px) {
+//     font-size: 42px;
+//   }
+// `
 
 const Subtitle = styled.div`
   margin: 27px 0;
@@ -121,7 +122,7 @@ const Hero = () => {
   }, []) // runs once
 
   const {
-    title,
+    // title,
     author,
     description,
     social,
@@ -135,11 +136,11 @@ const Hero = () => {
         alt={author}
         rotate={theta}
       />
-      <Title>{title}</Title>
+      {/* <Title>{title}</Title> */}
+      <Subtitle>{description}</Subtitle>
       <form method="get" action={publicURL}>
         <Button>Download Resume</Button>
       </form>
-      <Subtitle>{description}</Subtitle>
       <Links>
         <ALink href={social.github.url} target="_blank">
           <FaGithub size={42} />
