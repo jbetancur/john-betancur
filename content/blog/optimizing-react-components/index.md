@@ -79,14 +79,17 @@ Ok, let's throw a wrench into the cogs and also pass an object. For brevity, we 
 
 Damn, damn, damn. Now we're re-rendering again! Back to our comparison and sameness section above. What do you think is wrong here?
 
-Yep, you guessed it. The `data` object is being re-created every time `Parent` re-renders. Which means the shallow checking in `ExpensiveChild` `React.memo` is totally skipped because `data `is a different object reference. What a waste!
+![Waiting](./waiting.gif)
+
+
+Yep, you guessed it. The `data` object is being re-created every time `Parent` re-renders. Which means the shallow checking in `ExpensiveChild` `React.memo` is totally skipped because `data ` is a different object reference. What a waste!
 
 ## Solution
-We can memoize the `data` object before we pass it to `ExpensiveChild` if your data is dynamic or requires access to variables and functions within the component. [Memoization](https://en.wikipedia.org/wiki/Memoization) is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one. Here we can use the React hook `React.useMemo` (`React.useCallback` is useful for memoizing functions):
+We can memoize the `data` object before we pass it to `ExpensiveChild`. [Memoization](https://en.wikipedia.org/wiki/Memoization) is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one. Here we can use the React hook `React.useMemo` (`React.useCallback` is useful for memoizing functions):
 
 <iframe src="https://codesandbox.io/embed/re-render-memo-forever-ev7jh?expanddevtools=1&fontsize=14" title="Re-render Memo Fixed" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-You could of course just move the `data` variable declaration outside of the component (in the case of class components out of the render method) and it will only created once, however, what if your `data` object is actually derived from a function that returns your data object? In this outer scope scenario you will still need to memoize it using your own memoize function to a 3rd party library like [memoize-one](https://github.com/alexreardon/memoize-one) because every function invocation will return a new object.
+You could of course just move the `data` variable declaration outside of the component (in the case of class components out of the render method) and it will only be created once, however, what if your `data` object is actually derived from a function that returns your data object? In this outer scope scenario you will still need to memoize it using your own memoize function to a 3rd party library like [memoize-one](https://github.com/alexreardon/memoize-one) because every function invocation will return a new result.
 
 ## Recap
-Now that you've determined that your component requires a conditional re-render we should have a solid understanding that when the props we pass are objects, arrays or functions that we must take care not to recreate them every time a render occurs. This will ensure that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
+Now that you've determined that your expensive component requires a conditional re-render we should have a solid understanding that when the props we pass are objects, arrays or functions that we must take care not to recreate them every time a render occurs. This will ensure that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
