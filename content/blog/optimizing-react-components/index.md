@@ -1,7 +1,7 @@
 ---
 title: Optimizing React Components
 date: "2019-08-18T22:40:32.169Z"
-description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent to control when a particularly expensive component re-renders. In order for `React.memo` and `React.PureComponent` to work as intended you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise, the point of the optimization is defeated.
+description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent to control when a particularly expensive component re-renders. In order for React.memO and React.PureComponent to work as intended you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise, the point of the optimization is defeated.
 image: tuneup.jpg
 published: true
 ---
