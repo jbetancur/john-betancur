@@ -21,7 +21,7 @@ undefined === undefined // true
 null === null // true
 ```
 
-Objects are different, however. Instead of value comparison Javascript uses object reference instead. An object reference is pointer to the location of the object in memory, not its value or contents.
+Objects are different, however. Instead of value comparison Javascript uses object reference. An object reference is pointer to the location of the object in memory, not its value or contents.
 
 *Note that in Javascript arrays and functions are objects too!*
 
@@ -31,7 +31,7 @@ Objects are different, however. Instead of value comparison Javascript uses obje
 (() => {}) === (() => {}) // false
 ```
 
-Because we're comparing two objects that have **different references** in memory the result is false. Let's instead compare the **same object reference** and see what the result is:
+Because we're comparing two objects that have **different references** result is false. Let's instead compare the **same object reference** and see what the result is:
 
 ```js
 const obj = {};
@@ -44,25 +44,25 @@ const func = () => {}
 func === func // true
 ```
 
-It turns out comparing the same reference results in true because comparing `obj` to itself refers to the same address in memory!
+As expected, comparing the same reference is true because comparing `obj` to itself refers to the same address in memory.
 
-If you're thinking about deep object comparison that's for another post. The main takeaway here is for you to understand that `{}` is not equal to `{}` and that each is different object reference.
+If you're thinking, "what about deep object comparison?", that's for another post. The main takeaway here is for you to understand that `{}` is not equal to `{}` and that each is different object reference.
 
 Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive.*
 
 ## Are My Component Props Really The Same?
-This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props as parameters that are called when the component first mounts, and subsequently when the state changes from a parent or within the component itself. `React.PureComponent` or `React.memo` simply give us an escape hatch to the rendering process to check if our props did not change and thus return true or false if the function (the component) should be called again (re-render).
+This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props that are called when the component first mounts(the function is first called), and then subsequently every time the state changes from a parent or within the component itself. `React.PureComponent` or `React.memo` gives us an escape hatch to the rendering process to check if our props were equal and if so then skip the re-render.
 
-Let's pretend for whatever reason that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` is a request to re-render with the updated `count`:
+Let's pretend that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` is a request to react to re-render with the updated `count`:
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 However, we want to limit `ExpensiveChild` to only re-render when it needs to. Let's go ahead and configure our component to only re-render when its props change.
 
 ### Using React.PureComponent
-By making our class Component a `React.PureComponent` we can have React do some shallow checks on our props and detect if they have changes. If the props are all equal, re-rendering is skipped:
+By making our class Component a `React.PureComponent` we can have React perform some shallow prop checks and detect if they have changed. If the props are all equal, re-rendering is skipped:
 
 <iframe src="https://codesandbox.io/embed/purecomponent-66xl6?expanddevtools=1&fontsize=14" title="PureComponent" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -81,15 +81,14 @@ Damn, damn, damn. Now we're re-rendering again! Back to our comparison and samen
 
 ![Waiting](./waiting.gif)
 
-
-Yep, you guessed it. The `data` object is being re-created every time `Parent` re-renders. Which means the shallow checking in `ExpensiveChild` `React.memo` is totally skipped because `data ` is a different object reference. What a waste!
+Yep, you guessed it. The `data` object is being re-created every time `Parent` re-renders. Which means the shallow prop checking in `ExpensiveChild` `React.memo` is totally skipped because `data` is a different object reference. What a waste!
 
 ## Solution
-We can memoize the `data` object before we pass it to `ExpensiveChild`. [Memoization](https://en.wikipedia.org/wiki/Memoization) is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one. Here we can use the React hook `React.useMemo` (`React.useCallback` is useful for memoizing functions):
+We can memoize the `data` object before we pass it to `ExpensiveChild`. [Memoization](https://en.wikipedia.org/wiki/Memoization) is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one. Here we can use the React hook `React.useMemo` (`React.useCallback` is useful when we want to memoize a function):
 
 <iframe src="https://codesandbox.io/embed/re-render-memo-forever-ev7jh?expanddevtools=1&fontsize=14" title="Re-render Memo Fixed" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 You could of course just move the `data` variable declaration outside of the component (in the case of class components out of the render method) and it will only be created once, however, what if your `data` object is actually derived from a function that returns your data object? In this outer scope scenario you will still need to memoize it using your own memoize function to a 3rd party library like [memoize-one](https://github.com/alexreardon/memoize-one) because every function invocation will return a new result.
 
 ## Recap
-Now that you've determined that your expensive component requires a conditional re-render we should have a solid understanding that when the props we pass are objects, arrays or functions that we must take care not to recreate them every time a render occurs. This will ensure that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
+After you've determined that your React component benefits from using `React.PureComponent` or `React.memo` it's important to make sure that objects, arrays or functions you pass in as props are not recreated on each render cycle. This ensures that our `React.memo` and `React.PureComponent` are doing what they were intended to do.
