@@ -11,7 +11,7 @@ While pre-optimization can sometimes be the root of all evil there are times whe
 Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite the use of `React.memo` on expensive components, the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort whenever it's parent component triggered a re-render.
 
 ## Equality & Sameness
-Before we delve into the solution, it's important to briefly revisit how Javascript performs comparisons. Let's start with primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. This means that comparing primitive values to another equal primitive value will result in a true condition:
+Before we delve into the solution, it's important to briefly revisit how Javascript performs comparisons. Let's start with primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. This means that comparing a primitive value to another equal primitive value will result in a true condition:
 
 ```js
 'hello' === 'hello' // true
@@ -46,7 +46,7 @@ func === func // true
 
 It turns out comparing the same reference results in true because comparing `obj` to itself refers to the same address in memory!
 
-If you're thinking about deep object comparison that's for another post. The main takeaway here is for you to understand that `{}` is not equal to `{}` or that it is a different object reference.
+If you're thinking about deep object comparison that's for another post. The main takeaway here is for you to understand that `{}` is not equal to `{}` and that each is different object reference.
 
 Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
