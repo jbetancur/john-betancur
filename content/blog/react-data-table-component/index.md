@@ -31,10 +31,14 @@ const columns = [
 ];
 
 const MyComponent = () => (
+  ...
   <DataTable
     title="Arnold Movies"
     columns={columns}
     data={data}
+    pagination
+    selectableRows
+    progressPending={loading}
   />
 );
 ```
@@ -42,7 +46,7 @@ const MyComponent = () => (
 ## React Data Table Component
 This is the reason I wrote [React Data Table Component](https://github.com/jbetancur/react-data-table-component). Quite a mouthful, but simple to use.
 
-At it's most basic level all you need is an array of data and column definitions. The API of using `data` and `columns` is nothing new, but it's my opinion on what I think the API for a table component should be. Other table libraries give you access to each of the various table atoms: `Table`, `THead`, `Row`, `Cell`, `TBody`, etc. but what happens is you end up having to understand the implementation details of a table when it's likely that what you really wanted was to avoid having write one in the first place. Furthermore, it's on you to implement sorting, expandable columns, loading indicators, selectable rows, themes, etc. Why re invent the wheel?
+At it's most basic level all you need is an array of data and column definitions. The API of using `data` and `columns` is not an original idea by any stretch, but it's my opinion on what I think the API for a table component should be. An argument can be made for other table libraries give you access to each of the various table atoms: `Table`, `THead`, `Row`, `Cell`, `TBody`, etc. but what happens is you end up having to understand the implementation details of a table when it's likely that what you really wanted was to avoid having write one in the first place. Furthermore, it's on you to implement sorting, expandable columns, loading indicators, selectable rows, themes, etc. Why re invent the wheel?
 
 So let's go over some examples of table use cases...
 
