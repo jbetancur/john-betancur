@@ -1,6 +1,6 @@
 ---
 title: Optimizing React Components
-description: If you are using React.memo or React.PureComponent to skip rendering on an expensive component, you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise, the point of the optimization is defeated...
+description: If you are using React.memo or React.PureComponent to skip rendering on an expensive component, you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise...
 date: "2019-08-18T22:40:32.169Z"
 image: tuneup.jpg
 published: true
