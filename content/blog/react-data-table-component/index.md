@@ -1,6 +1,6 @@
 ---
 title: Yet Another React Data Table
-description:
+description: ''
 date: "2019-08-09T22:40:32.169Z"
 image: table.jpg
 published: true

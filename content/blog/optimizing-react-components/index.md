@@ -1,6 +1,6 @@
 ---
 title: Optimizing React Components
-description:
+description: ''
 date: "2019-08-18T22:40:32.169Z"
 image: tuneup.jpg
 published: true
