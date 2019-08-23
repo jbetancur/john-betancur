@@ -1,12 +1,12 @@
 ---
 title: Optimizing React Components
-description: ''
+description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo or React.PureComponent to skip re-rendering on an expensive component. In order for React.memo and React.PureComponent...
 date: "2019-08-18T22:40:32.169Z"
 image: tuneup.jpg
 published: true
 ---
 
-While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to control when a particularly expensive component re-renders. In order for `React.memo` and `React.PureComponent` to work as intended you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise, the point of the optimization is defeated.
+While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to skip re-rendering on an expensive component. In order for `React.memo` and `React.PureComponent` to work as intended you'll want to ensure that any object based props you are passing to your component are actually "the same", otherwise, the point of the optimization is defeated.
 
 Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite the use of `React.memo` on expensive components, the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort whenever it's parent component triggered a re-render.
 
