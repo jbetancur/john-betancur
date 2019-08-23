@@ -10,10 +10,6 @@ const Title = styled.span`
   font-weight: 500;
   font-size: 24px;
   color: #FFFFFF;
-
-  @media only screen and (max-width: 600px) {
-    font-size: 20px;
-  }
 `;
 
 const Avatar = styled.div`
