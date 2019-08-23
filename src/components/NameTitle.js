@@ -10,19 +10,19 @@ const Title = styled.span`
   font-weight: 500;
   font-size: 24px;
   color: #FFFFFF;
-`;
+`
 
 const Avatar = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 const AvatarImage = styled(Image)`
   margin-right: ${rhythm(1 / 2)};
   margin-bottom: 0;
   border-radius: 100%;
   border: 2px solid white;
-`;
+`
 
 const NameTitle = ({ hideAvatarImage }) => {
   return (

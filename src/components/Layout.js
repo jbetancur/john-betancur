@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from './Header'
 import { rhythm } from '../utils/typography'
 
-const Main = styled.main`
+const Wrapper = styled.main`
   margin-left: auto;
   margin-right: auto;
   max-width: ${rhythm(30)};
@@ -13,14 +13,14 @@ const Main = styled.main`
 const Layout = ({ children }) => (
   <>
   <Header />
-    <Main>
-      {children}
+    <Wrapper>
+      <main>{children}</main>
       {/* <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer> */}
-    </Main>
+    </Wrapper>
   </>
   );
 
