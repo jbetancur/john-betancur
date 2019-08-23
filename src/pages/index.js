@@ -34,6 +34,7 @@ const BlogIndex = ({ data, location }) => {
         placeholder="Search Posts"
         value={filter}
         onChange={handleFilter}
+        onClick={() => setFilter('')}
       />
 
       {filteredPosts.map(({ node }) => {
