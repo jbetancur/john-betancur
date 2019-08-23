@@ -106,7 +106,7 @@ const Hero = () => {
   const [theta, setTheta] = useState(false);
 
   const handleScroll = () => {
-    const scrollTop = document.documentElement.scrollTop;
+    const scrollTop = window.scrollY || window.pageYOffset || document.body.scrollTop + (document.documentElement && (document.documentElement.scrollTop || 0));
     const offset = 50;
 
     if (scrollTop > offset) {

@@ -42,6 +42,7 @@
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
+    "eslint": "^6.2.1",
     "prettier": "^1.18.2"
   },
   "keywords": [
