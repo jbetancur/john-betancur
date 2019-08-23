@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from './Header'
 import { rhythm } from '../utils/typography'
 
-const Wrapper = styled.main`
+const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: ${rhythm(30)};
