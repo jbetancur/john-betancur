@@ -6,7 +6,7 @@ image: tuneup.jpg
 published: true
 ---
 
-If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to skip re-rendering on an expensive component, you'll want to make any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
+If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to skip re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
 
 Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite the use of `React.memo` on expensive components, the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort whenever it's parent component triggered a re-render.
 
