@@ -31,7 +31,7 @@ Objects are different, however. Instead of value comparison Javascript uses obje
 (() => {}) === (() => {}) // false
 ```
 
-Because we're comparing two objects that have **different references** result is false. Let's compare the **same object reference** and see what the result is:
+Because we're comparing two objects that have **different references** the result is false. Let's compare the **same object reference**:
 
 ```js
 const obj = {};
