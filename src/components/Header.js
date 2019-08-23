@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Link, Location } from '@reach/router'
 import NameTitle from './NameTitle'
 import NavLink from './NavLink'
-import { rhythm } from '../utils/typography'
 
 const HeaderStyle = styled.header`
   position: sticky;

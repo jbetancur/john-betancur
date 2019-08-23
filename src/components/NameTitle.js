@@ -10,6 +10,7 @@ const Title = styled.span`
   font-weight: 500;
   font-size: 24px;
   color: #FFFFFF;
+  line-height: 1;
 `
 
 const Avatar = styled.div`
