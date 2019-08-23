@@ -1,7 +1,7 @@
 ---
 title: When to use PureComponent and Memo
+description:
 date: "2019-08-19T22:40:32.169Z"
-description: While pre-optimization can sometimes be the root of all evil there are times when you need to use shallow prop comparisons such as React.memo and React.PureComponent. But what happens when you've done that and your component still re-renders?
 published: false
 ---
 

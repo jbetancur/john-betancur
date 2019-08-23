@@ -1,15 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, Location } from '@reach/router';
-import NameTitle from "./NameTitle"
-import NavLink from './NavLink';
+import React from 'react'
+import styled from 'styled-components'
+import { Link, Location } from '@reach/router'
+import NameTitle from './NameTitle'
+import NavLink from './NavLink'
+import { rhythm } from '../utils/typography'
 
 const HeaderStyle = styled.header`
   position: sticky;
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 24px 0 24px;
   width: 100%;
   height: 72px;
   background-color: #53AAD9;
@@ -19,34 +21,32 @@ const HeaderStyle = styled.header`
   @media only screen and (max-width: 600px) {
     height: 64px;
   }
-`;
+`
 
 const NameTitleLink = styled(Link)`
   text-decoration: none;
   border: none;
   box-shadow: none;
-`;
+`
 
-const Header = () => {
-  return(
-    <Location>
-      {({ location }) => {
-        const isAboutPage = location.pathname === '/about' || location.pathname === '/about/';
+const Header = () => (
+  <Location>
+    {({ location }) => {
+      const isAboutPage = location.pathname === '/about' || location.pathname === '/about/'
 
-        return (
-          <HeaderStyle shadow={!isAboutPage}>
-            <NameTitleLink to="/">
-              <NameTitle hideAvatarImage={isAboutPage} />
-            </NameTitleLink>
-            <div>
-              <NavLink to="/">Blog</NavLink>
-              <NavLink to="/about">About</NavLink>
-            </div>
-          </HeaderStyle>
-        );
-      }}
-    </Location>
-  );
-};
+      return (
+        <HeaderStyle shadow={!isAboutPage}>
+          <NameTitleLink to="/">
+            <NameTitle hideAvatarImage={isAboutPage} />
+          </NameTitleLink>
+          <div>
+            <NavLink to="/">Blog</NavLink>
+            <NavLink to="/about">About</NavLink>
+          </div>
+        </HeaderStyle>
+      );
+    }}
+  </Location>
+)
 
-export default Header;
+export default Header

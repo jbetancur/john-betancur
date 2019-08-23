@@ -1,33 +1,27 @@
-import React from 'react';
-import Header from './Header';
+import React from 'react'
+import styled from 'styled-components'
+import Header from './Header'
+import { rhythm } from '../utils/typography'
 
-import { rhythm } from "../utils/typography"
+const Main = styled.main`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: ${rhythm(30)};
+  padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+`;
 
-class Layout extends React.Component {
-  render() {
-    const { children } = this.props;
-
-    return (
-      <>
-        <Header />
-        <div
-          style={{
-            marginLeft: `auto`,
-            marginRight: `auto`,
-            maxWidth: rhythm(32),
-            padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-          }}
-        >
-          <main>{children}</main>
-          {/* <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer> */}
-        </div>
-      </>
-    )
-  }
-}
+const Layout = ({ children }) => (
+  <>
+  <Header />
+    <Main>
+      {children}
+      {/* <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.org">Gatsby</a>
+      </footer> */}
+    </Main>
+  </>
+  );
 
 export default Layout
