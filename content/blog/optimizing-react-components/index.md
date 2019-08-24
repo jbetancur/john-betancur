@@ -48,18 +48,7 @@ const func = () => {}
 func === func // true
 ```
 
-Comparing the same reference is true because `obj` refers to the same address in memory. You might be thinking what happens if I mutate `obj`?
-
-```js
-const obj = {}
-obj.hello = 'world'
-
-obj === obj // true
-```
-
-`obj` is still true because the reference (location in memory) did not change. If you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects, but that is not the same os object reference equality.
-
-One last thing regarding object equality. What if our object is derived from the result of a function?
+Comparing the same reference is true because `obj` refers to the same address in memory. One last thing regarding object equality. What if our object is derived from the result of a function?
 
 ```js
 function hello() { return 'hello planet earth' }
@@ -69,12 +58,14 @@ function hello() { return { planet: 'earth' } }
 hello() === hello() // false - the object reference is different
 ```
 
+The same principles of equality apply.
+
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive into Javascript equality.*
 
 ### Really, Really, Checking React props for Equality
 This concept took me way too long to grasp (I'm a slow learner), but think of React components as functions (i.e. `function Component(props) {...}`) that are called when the component first mounts (the function is first called), then subsequently every time a state change originates from a parent or within the component itself. But what if we wanted to skip subsequent function invocations (i.e. re-renders)? Why should the function run again if its props haven't changed? Shouldn't the result be the same anyway?
 
-Let's build on this idea with some examples. Pretend that `ExpensiveChild` is some crazy expensive component that slows down our UI. Luckily, React provides us with `React.memo` and `React.PureComponent`. Both give us an escape hatch to the rendering process and are a good starting point by allowing React to perform a [shallow prop check](https://github.com/facebook/react/blob/v16.9.0/packages/shared/shallowEqual.js) on any props that are passed to a component before the component re-renders.
+Pretend that `ExpensiveChild` is some crazy expensive component that slows down our UI. Luckily, React provides us with `React.memo` and `React.PureComponent`. Both give us an escape hatch to the rendering process and are a good starting point by allowing React to perform a [shallow prop check](https://github.com/facebook/react/blob/v16.9.0/packages/shared/shallowEqual.js) on any props that are passed to a component before the component re-renders.
 
 In the example below, you'll notice that `ExpensiveChild` will re-render every time you click either of the buttons. You may already know that this is because `setCount` (`this.setState` in a class component) is a request for React to re-render `Parent` with the updated `count`. By design, when `Parent` re-renders React will also re-render all of its children all the way down the component hierarchy.
 
