@@ -98,7 +98,7 @@ Damn, damn, damn. Now we're re-rendering again! Shouldn't `React.memo` have take
 
 You guessed it! The `data` object is being re-created every time `Parent` re-renders. Which means the `React.memo` shallow prop checking in `ExpensiveChild` is skipped. What a waste!
 
-As mentioned previously, what if we could somehow cache a reference to the `data` and just pass that instead of re-creating it on every re-render?
+As mentioned previously, what if we could somehow cache a reference to `data` and just pass that instead of re-creating it on every re-render?
 
 ## Memoization
 [Memoization](https://en.wikipedia.org/wiki/Memoization) is just that. Memoization is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one.
