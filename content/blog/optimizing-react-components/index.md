@@ -76,7 +76,7 @@ Let's build on this idea with some examples. Pretend that `ExpensiveChild` is so
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
  
- Let's apply `React.memo` and `React.PureComponent` to `ExpensiveChild` and see what happens:
+Let's apply `React.memo` and `React.PureComponent` to `ExpensiveChild` and see what happens:
 
 ### Using React.PureComponent
 By extending our class Component with `React.PureComponent` React will only render `ExpensiveChild` on the initial mount. Thereafter, re-renders are skipped unless the string prop `text` changes:
