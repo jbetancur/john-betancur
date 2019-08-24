@@ -75,7 +75,7 @@ Luckily, React provides us with `React.memo` and `React.PureComponent`. Both giv
 Let's build on this idea with some examples. Pretend that `ExpensiveChild` is some crazy expensive component that slows down our UI. In the example below, you'll notice that `ExpensiveChild` will re-render every time you click either of the buttons. You may already know that this is because `setCount` (`this.setState` in a class component) is a request for React to re-render `Parent` with the updated `count`. By design, when `Parent` re-renders React will also re-render all of its children all the way down the component hierarchy. 
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
- 
+
 Let's apply `React.memo` and `React.PureComponent` to `ExpensiveChild` and see what happens:
 
 ### Using React.PureComponent
