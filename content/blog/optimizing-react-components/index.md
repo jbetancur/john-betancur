@@ -68,7 +68,7 @@ hello() === hello() // false - the object reference is different
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive into Javascript equality.*
 
 ## Really, Really, Checking React props for Equality
-This concept took me way too long to grasp (I'm a slow learner), but think of React components as functions (i.e. `function Component(props) {...}`) that are called when the component first mounts (the function is first called), then subsequently every time a state change originates from a parent or within the component itself. But what if we wanted to skip subsequent function invocations (i.e. re-renders)? Why should the function run again of the props haven't changed? Shouldn't the result be the same anyway?
+This concept took me way too long to grasp (I'm a slow learner), but think of React components as functions (i.e. `function Component(props) {...}`) that are called when the component first mounts (the function is first called), then subsequently every time a state change originates from a parent or within the component itself. But what if we wanted to skip subsequent function invocations (i.e. re-renders)? Why should the function run again if its props haven't changed? Shouldn't the result be the same anyway?
 
 Luckily, React provides us with `React.memo` and `React.PureComponent`. Both give us an escape hatch to the rendering process and are a good starting point by allowing React to perform a [shallow prop check](https://github.com/facebook/react/blob/v16.9.0/packages/shared/shallowEqual.js) on any props that are passed to a component before the component re-renders.
 
