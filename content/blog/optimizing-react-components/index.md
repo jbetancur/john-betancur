@@ -96,7 +96,7 @@ Let's make this more interesting by also passing the `data` object. For brevity 
 
 Damn, damn, damn. Now we're re-rendering again! Shouldn't `React.memo` have taken care of this for us? What do you think is wrong here?
 
-You guessed it! The `data` object is being re-created every time `Parent` re-renders. Which means the `React.memo` shallow prop checking in `ExpensiveChild` is skipped because `data` is a different object reference every time `Parent` re-renders. What a waste!
+You guessed it! The `data` object is being re-created every time `Parent` re-renders. Which means the `React.memo` shallow prop checking in `ExpensiveChild` is skipped. What a waste!
 
 As mentioned previously, what if we could somehow cache a reference to the `data` and just pass that instead of re-creating it on every re-render?
 
