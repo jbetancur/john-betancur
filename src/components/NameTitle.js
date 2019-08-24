@@ -38,6 +38,9 @@ const NameTitle = ({ hideAvatarImage }) => {
               <AvatarImage
                 fixed={data.avatar.childImageSharp.fixed}
                 alt={author}
+                style={{
+                  minWidth: 48,
+                }}
                 imgStyle={{
                   borderRadius: `50%`,
                 }}
