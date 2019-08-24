@@ -44,7 +44,7 @@ const func = () => {}
 func === func // true
 ```
 
-As expected, comparing the same reference is true because comparing `obj` to itself refers to the same address in memory. You might be thinking what happens if I mutate `obj`? Will it stil be equal?
+As expected, comparing the same reference is true because comparing `obj` to itself refers to the same address in memory. You might be thinking what happens if I mutate `obj`? Will it still be equal?
 
 ```js
 const obj = {}
