@@ -6,12 +6,12 @@ image: tuneup.jpg
 published: true
 ---
 
-If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to skip re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
+If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo target="_blank") or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to skip re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
 
-Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of headers, rows, cells and in some places expensive calculations such as sorting, column generation, themes, etc...). Despite the use of `React.memo` on expensive components, the entire React Data Table library would re-render its rows, columns, cells, checkboxes and perform a re-sort whenever it's parent component triggered a re-render.
+Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of columns, rows, cells and in some places expensive calculations such as sorting, column generation, etc...). Despite the use of `React.memo` on expensive components, the entire React Data Table library would re-render all those rows, columns, cells and perform any data based calculations whenever the parent component triggered a re-render.
 
 ## Equality & Sameness
-Before we delve into the solution, it's important to briefly revisit how Javascript performs comparisons. Let's start with primitives. Primitives in Javascript are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. This means that comparing a primitive value to another equal primitive value will result in a true condition:
+Before we delve into the solution, it's important to briefly revisit how Javascript performs comparisons. Let's start with primitives. Primitives are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. Meaning that comparing a primitive value to another equal primitive value will result in a true condition:
 
 ```js
 'hello' === 'hello' // true
@@ -21,7 +21,7 @@ undefined === undefined // true
 null === null // true
 ```
 
-Objects are different, however. Instead of value comparison Javascript uses object reference. An object reference is pointer to the location of the object in memory, not its value or contents.
+Object equality, however, is determined by reference. A reference is pointer to the location of the object in memory, not its value or contents:
 
 *Note that in Javascript arrays and functions are objects too!*
 
@@ -34,40 +34,51 @@ Objects are different, however. Instead of value comparison Javascript uses obje
 Because we're comparing two objects that have **different references** the result is false. Let's compare the **same object reference**:
 
 ```js
-const obj = {};
+const obj = {}
 obj === obj // true
 
-const arr = [];
+const arr = []
 arr === arr // true
 
 const func = () => {}
 func === func // true
 ```
 
-As expected, comparing the same reference is true because comparing `obj` to itself refers to the same address in memory.
+As expected, comparing the same reference is true because comparing `obj` to itself refers to the same address in memory. You might be thinking what happens if I mutate `obj`? Will it stil be equal?
 
-If you're thinking, "what about deep object comparison?", that's for another post. The main takeaway here is for you to understand that `{}` is not equal to `{}` and that each is different object reference.
+```js
+const obj = {}
+obj.hello = 'world'
 
-Hold onto this tidbit of knowledge as it's going to take us far into making sure our `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
+obj === obj // true
+```
+
+Yep, you guessed it! Javascript is still only comparing the reference in memory.
+
+If you really wanted to make sure `obj` is truly equal you would need to iterate through each property. Luckily, React will perform a shallow comparison for us using `React.memo` and `React.PureComponent` (I'll cover shallow vs. deep comparisons in a future post). The main takeaway here is for you to understand that `{}` is not equal to `{}` unless the reference is the same.
+
+Hold onto this tidbit of knowledge as it's going to take us far into making sure `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive.*
 
-## Are My Component Props Really The Same?
-This concept took me way too long to grasp, but components at their most basic level are nothing more than functions with props that are called when the component first mounts(the function is first called), and then subsequently every time the state changes from a parent or within the component itself. `React.PureComponent` or `React.memo` gives us an escape hatch to the rendering process to check if our props were equal and if so then skip the re-render.
+## Checking props for Equality
+This concept took me way too long to grasp, but think of React components as functions (with props) that are called when the component first mounts (i.e. the function is first called), then subsequently every time a state change originates from a parent or within the component itself. 
 
-Let's pretend that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` is a request to react to re-render with the updated `count`:
+As mentioned previously, `React.PureComponent` or `React.memo` give us an escape hatch to the rendering process to check if our props were equal, if so, React skips the re-render. There is a certain amount of overhead to do this check so you have to be weigh the cost of a re-render vs. the cost of a prop equality check (I'll cover this in a future article).
+
+Let's pretend that `ExpensiveChild` is some crazy expensive component. In the example below you'll notice that `ExpensiveChild` will re-render every time you click a button (i.e. the state is updated in `Parent`). You may already know that this is because `setCount` (`this.setState` in a class component) is a request for React to re-render `Parent` with the updated `count`:
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-However, we want to limit `ExpensiveChild` to only re-render when it needs to. Let's go ahead and configure our component to only re-render when its props change.
+However, when `Parent` re-renders so React will re-render all of its children. In our case, we'd like to limit `ExpensiveChild` to only re-render when it needs to. Let's go ahead and configure our component to only re-render when its props change.
 
 ### Using React.PureComponent
-By making our class Component a `React.PureComponent` we can have React perform some shallow prop checks and detect if they have changed. If the props are all equal, re-rendering is skipped:
+By extending our class Component from `React.PureComponent` we can have React perform some shallow prop checks and detect if they have changed. If the props are all equal, re-rendering is skipped:
 
 <iframe src="https://codesandbox.io/embed/purecomponent-66xl6?expanddevtools=1&fontsize=14" title="PureComponent" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
 ### Using React.memo
-We can do the same thing for a functional component using `React.memo`:
+We can do the same thing for a functional component by wrapping it with `React.memo`:
 
 <iframe src="https://codesandbox.io/embed/re-render-forever-hvsf6?expanddevtools=1&fontsize=14" title="Memo" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
