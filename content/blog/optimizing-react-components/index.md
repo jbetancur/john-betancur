@@ -53,11 +53,11 @@ obj.hello = 'world'
 obj === obj // true
 ```
 
-Yep, you guessed it! Javascript is still only comparing the reference in memory.
+Yep, it's still true because the `obj` reference (location in memory) did not change.
 
-If you really wanted to make sure `obj` is truly equal you would need to iterate through each property. Luckily, React will perform a shallow comparison for us using `React.memo` and `React.PureComponent` (I'll cover shallow vs. deep comparisons in a future post). The main takeaway here is for you to understand that `{}` is not equal to `{}` unless the reference is the same.
+So, if you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects. Luckily, React will perform a shallow comparison of the old props (before re-render) and the new props (after re-render) when using `React.memo` and `React.PureComponent` (I'll cover shallow vs. deep comparisons in a future post). 
 
-Hold onto this tidbit of knowledge as it's going to take us far into making sure `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
+The main takeaway is that `{}` is not the same reference or equality to `{}`, therefore, React will treat these as different instances of your object when performing it's comparisons. Hold onto this tidbit of knowledge as it's going to take us far into making sure `React.memo` and `React.PureComponent` are actually solving our re-rendering issue.
 
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive.*
 
