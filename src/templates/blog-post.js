@@ -16,6 +16,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        image={post.frontmatter.image.publicURL}
       />
       {post.frontmatter.image && (
         <Image
@@ -97,6 +98,7 @@ export const pageQuery = graphql`
         description
         published
         image {
+          publicURL
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid

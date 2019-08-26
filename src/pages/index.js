@@ -114,12 +114,12 @@ export const pageQuery = graphql`
               title
               description
               image {
-              publicURL
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
+                publicURL
+                childImageSharp {
+                  fluid {
+                    ...GatsbyImageSharpFluid
+                  }
                 }
-              }
               }
             }
           }

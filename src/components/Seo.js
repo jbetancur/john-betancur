@@ -19,6 +19,7 @@ const SEO = ({ description, lang, meta, image, slug, keywords, title }) => {
             title
             description
             author
+            siteUrl
             social {
               twitter {
                 title
