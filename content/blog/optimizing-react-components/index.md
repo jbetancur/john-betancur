@@ -57,9 +57,9 @@ obj.hello = 'world'
 obj === obj // true
 ```
 
-Actually, `obj` is still true because the reference (location in memory) did not change. If you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects.
+`obj` is still true because the reference (location in memory) did not change. If you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects, but that is not the same os object reference equality.
 
-One last thing regarding equality. What if our object is derived from the result of a function?
+One last thing regarding object equality. What if our object is derived from the result of a function?
 
 ```js
 function hello() { return 'hello planet earth' }
