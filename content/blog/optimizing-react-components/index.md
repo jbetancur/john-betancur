@@ -15,7 +15,7 @@ Let's start with the answer. Make sure any object based props you are passing to
 Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of columns, rows, cells and in some places expensive calculations such as sorting, managing multiple checkbox state, column generation, etc.). Despite the use of `React.memo` on certain expensive components, the entire React Data Table library would re-render unnecessarily causing it to be noticeably slower when there were more than say twenty or thirty rows. The simple math is that a ten column table with thirty rows is three hundred something components (cells) all re-rendering.
 
 ## Equality & Sameness
-Before we delve into the solution, let's briefly revisit how Javascript determines equality starting with primitives. Primitives are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. Comparing a primitive value to another equal primitive value will result in a true condition:
+Before we delve into the solution, let's briefly revisit how Javascript determines equality, starting with primitives. Primitives are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. Comparing a primitive value to another equal primitive value will result in a true condition:
 
 ```js
 'hello' === 'hello' // true
@@ -102,9 +102,9 @@ Damn, damn, damn. Now we're re-rendering again! Shouldn't `React.memo` have take
 
 You guessed it! The `data` object is being re-created every time `Parent` re-renders. Which means the `React.memo` shallow prop checking in `ExpensiveChild` is skipped. What a waste!
 
-One glaringly obvious solution is to just move `data` outside of `Parent` so it is only created once, however, what if your object needs the `Parent` scope?
+One glaringly obvious solution is to just move `data` outside of `Parent` so it's only created once, however, what if your `data` object needs the `Parent` scope?
 
-What there was a way to cache a reference to `data` while keeping it's scope within our component. Then, pass that to `ExpensiveChild` instead of re-creating `data` it on every re-render?
+There must be a way to cache a reference to `data` while keeping it's scope within our component, then, pass that to `ExpensiveChild` instead of re-creating `data` it on every re-render...
 
 ## Memoization
 [Memoization](https://en.wikipedia.org/wiki/Memoization) is just that. Memoization is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one.
