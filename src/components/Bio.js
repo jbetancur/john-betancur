@@ -37,8 +37,7 @@ const Bio = () => (
             }}
           />
           <p>
-            Written by <strong>{author}</strong> who lives and works
-            in New York City building useful things.
+            Written by <strong>{author}</strong> who lives and works in New York City building useful things.
             {` `}
             <a href={social.twitter.url}>
               You should follow him on Twitter
