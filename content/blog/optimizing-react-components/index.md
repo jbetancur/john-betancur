@@ -107,7 +107,7 @@ One glaringly obvious solution is to just move `data` outside of `Parent` so it'
 There must be a way to cache a reference to `data` while keeping it's scope within our component, then, pass that to `ExpensiveChild` instead of re-creating `data` on every re-render...
 
 ## Memoization
-[Memoization](https://en.wikipedia.org/wiki/Memoization) is just that. Memoization is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one.
+[Memoization](https://en.wikipedia.org/wiki/Memoization) is a fancy computer science term for caching the result of a value or function and keeping it's object reference rather than creating a new one.
 
 Let's memoize the `data` prop before it's passed to `ExpensiveChild`. In our functional component example we can use `React.useMemo` (`React.useCallback` is useful when we want to memoize a function):
 
