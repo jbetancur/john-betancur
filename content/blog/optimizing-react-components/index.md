@@ -48,7 +48,7 @@ const func = () => {}
 func === func // true
 ```
 
-Comparing the same reference is true because `obj` refers to the same address in memory. You might be thinking what happens if I mutate `obj`? Will equality still be true?
+Comparing the same reference is true because `obj` refers to the same address in memory. You might be thinking what happens if I mutate `obj`?
 
 ```js
 const obj = {}
@@ -57,9 +57,9 @@ obj.hello = 'world'
 obj === obj // true
 ```
 
-Actually, yes. `obj` is still true because the reference (location in memory) did not change. If you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects.
+Actually, `obj` is still true because the reference (location in memory) did not change. If you really wanted to make sure `obj` is truly equal to some other object you would need to iterate through each property in both objects.
 
-One last thing regarding equality. What if our object is derived from a the result of a function?
+One last thing regarding equality. What if our object is derived from the result of a function?
 
 ```js
 function hello() { return 'hello planet earth' }
