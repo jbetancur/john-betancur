@@ -1,14 +1,18 @@
 ---
-title: Optimizing React Renders
-description: If you're using React.memo or React.PureComponent to skip re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle...
+title: Optimizing React Rendering
+description: Why does my component re-render when using  React.memo or React.PureComponent?
 date: "2019-08-18"
 image: tuneup.jpg
 published: true
 ---
 
-If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to prevent re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
+Why does my component re-render when using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent)?
 
-Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of columns, rows, cells and in some places expensive calculations such as sorting, managing multiple checkbox state, column generation, etc.). Despite the use of `React.memo` on certain expensive components, the entire React Data Table library would re-render unnecessarily causing it to be noticeably slower when there were more than say 20 or 30 rows. If you do the math, a 10 column table with 30 rows is 300 something components.
+## TL;DR
+Let's start with the answer. Make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of these optimizations are defeated. Of course, you're probably here because you want to dig a little deeper...
+
+## Houston, We Have a Problem
+Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of columns, rows, cells and in some places expensive calculations such as sorting, managing multiple checkbox state, column generation, etc.). Despite the use of `React.memo` on certain expensive components, the entire React Data Table library would re-render unnecessarily causing it to be noticeably slower when there were more than say twenty or thirty rows. The simple math is that a ten column table with thirty rows is three hundred something components (cells) all re-rendering.
 
 ## Equality & Sameness
 Before we delve into the solution, let's briefly revisit how Javascript determines equality starting with primitives. Primitives are strings, numbers, booleans, undefined and null (yep, undefined and null are types). These are considered value based comparisons. Comparing a primitive value to another equal primitive value will result in a true condition:
@@ -67,7 +71,7 @@ hello() === hello() // false - the object reference is different
 
 *Checkout [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) if you want a deeper dive into Javascript equality.*
 
-## Really, Really, Checking React props for Equality
+### Really, Really, Checking React props for Equality
 This concept took me way too long to grasp (I'm a slow learner), but think of React components as functions (i.e. `function Component(props) {...}`) that are called when the component first mounts (the function is first called), then subsequently every time a state change originates from a parent or within the component itself. But what if we wanted to skip subsequent function invocations (i.e. re-renders)? Why should the function run again if its props haven't changed? Shouldn't the result be the same anyway?
 
 Let's build on this idea with some examples. Pretend that `ExpensiveChild` is some crazy expensive component that slows down our UI. Luckily, React provides us with `React.memo` and `React.PureComponent`. Both give us an escape hatch to the rendering process and are a good starting point by allowing React to perform a [shallow prop check](https://github.com/facebook/react/blob/v16.9.0/packages/shared/shallowEqual.js) on any props that are passed to a component before the component re-renders.

@@ -51,7 +51,7 @@ const BlogIndex = ({ data, location }) => {
                   marginBottom: rhythm(1 / 2),
                   borderTopLeftRadius: '10px',
                   borderTopRightRadius: '10px',
-                  height: '350px',
+                  height: '275px',
                 }}
               />
             )}

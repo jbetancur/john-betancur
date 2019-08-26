@@ -1,7 +1,7 @@
 ---
 title: Yet Another React Data Table
-description: ''
-date: "2019-08-09T22:40:32.169Z"
+description: What I was really looking for was a table library with a declarative API and with the least amount of cognitive load...'
+date: "2019-08-09"
 image: table.jpg
 published: true
 ---
