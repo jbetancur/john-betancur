@@ -102,7 +102,7 @@ Damn, damn, damn. Now we're re-rendering again! Shouldn't `React.memo` have take
 
 You guessed it! The `data` object is being re-created every time `Parent` re-renders. Which means the `React.memo` shallow prop checking in `ExpensiveChild` is skipped. What a waste!
 
-One glaringly obvious solution is to just move `data` outside of `Parent` so it's only created once, however, what if your `data` object needs the `Parent` scope?
+One glaringly obvious solution is to just move `data` outside of `Parent` so it's only created once, however, what if your `data` object needs access to the `Parent` scope?
 
 There must be a way to cache a reference to `data` while keeping it's scope within our component, then, pass that to `ExpensiveChild` instead of re-creating `data` it on every re-render...
 
