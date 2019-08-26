@@ -1,12 +1,12 @@
 ---
-title: Optimizing React Components
+title: Optimizing React Renders
 description: If you're using React.memo or React.PureComponent to skip re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle...
 date: "2019-08-18"
 image: tuneup.jpg
 published: true
 ---
 
-If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to prevent re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated. 
+If you're using [React.memo](https://reactjs.org/docs/react-api.html#reactmemo) or [React.PureComponent](https://reactjs.org/docs/react-api.html#reactpurecomponent) to prevent re-rendering on an expensive component, you'll want to make sure any object based props you are passing to your component are not being recreated on every re-render cycle, otherwise, the point of the optimization is defeated.
 
 Such an issue arose while I was developing [React Data Table](https://github.com/jbetancur/react-data-table-component). React Data Table has a deep component tree that consists of columns, rows, cells and in some places expensive calculations such as sorting, managing multiple checkbox state, column generation, etc.). Despite the use of `React.memo` on certain expensive components, the entire React Data Table library would re-render unnecessarily causing it to be noticeably slower when there were more than say 20 or 30 rows. If you do the math, a 10 column table with 30 rows is 300 something components.
 
@@ -72,7 +72,7 @@ This concept took me way too long to grasp (I'm a slow learner), but think of Re
 
 Let's build on this idea with some examples. Pretend that `ExpensiveChild` is some crazy expensive component that slows down our UI. Luckily, React provides us with `React.memo` and `React.PureComponent`. Both give us an escape hatch to the rendering process and are a good starting point by allowing React to perform a [shallow prop check](https://github.com/facebook/react/blob/v16.9.0/packages/shared/shallowEqual.js) on any props that are passed to a component before the component re-renders.
 
-In the example below, you'll notice that `ExpensiveChild` will re-render every time you click either of the buttons. You may already know that this is because `setCount` (`this.setState` in a class component) is a request for React to re-render `Parent` with the updated `count`. By design, when `Parent` re-renders React will also re-render all of its children all the way down the component hierarchy. 
+In the example below, you'll notice that `ExpensiveChild` will re-render every time you click either of the buttons. You may already know that this is because `setCount` (`this.setState` in a class component) is a request for React to re-render `Parent` with the updated `count`. By design, when `Parent` re-renders React will also re-render all of its children all the way down the component hierarchy.
 
 <iframe src="https://codesandbox.io/embed/re-render-child-as-props-9rmg5?expanddevtools=1&fontsize=14" title="Re-render Forever" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
@@ -88,7 +88,7 @@ We can achieve the same result as above for a functional component by wrapping i
 
 <iframe src="https://codesandbox.io/embed/re-render-forever-hvsf6?expanddevtools=1&fontsize=14" title="Memo" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-Wow, that was easy! No more re-renders! 
+Wow, that was easy! No more re-renders!
 
 Let's make this more interesting by also passing the `data` object. For brevity and cool points, we are going to stick with the Hooks example:
 
