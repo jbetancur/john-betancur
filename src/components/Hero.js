@@ -82,6 +82,7 @@ const query = graphql`
         title
         author
         description
+        allowResumeDownload
         social {
           twitter {
             url
@@ -126,6 +127,7 @@ const Hero = () => {
     author,
     description,
     social,
+    allowResumeDownload,
   } = data.site.siteMetadata
   const { publicURL } = data.allFile.edges[0].node
 
@@ -138,9 +140,11 @@ const Hero = () => {
       />
       {/* <Title>{title}</Title> */}
       <Subtitle>{description}</Subtitle>
-      <form method="get" action={publicURL}>
-        <Button>Download Resume</Button>
-      </form>
+      {allowResumeDownload && (
+        <form method="get" action={publicURL}>
+          <Button>Download Resume</Button>
+        </form>
+      )}
       <Links>
         <ALink href={social.github.url} target="_blank">
           <FaGithub size={42} />

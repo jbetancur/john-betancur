@@ -5,6 +5,7 @@ module.exports = {
     description: `Hello, my name is John Betancur. I'm a seasoned software engineer and problem solver with a passion for front-end development. I want to make a positive difference and work on challenging projects with people that are smarter than me.`,
     siteUrl: `https://johnbetancur.com`,
     footnote: `johnbetancur.com`,
+    allowResumeDownload: false,
     social: {
       twitter: {
         url: `https://twitter.com/johnnyazee`,
