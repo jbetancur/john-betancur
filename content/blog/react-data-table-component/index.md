@@ -132,9 +132,9 @@ const MyComponent = () => (
 And a bunch more...
 
 ## Community
-Whenever I decide to use an open source library one of the first things I check for is community and activity. To my unexpected surprise React Data Table Component is gaining contributions and is already up to 90 something stars and over 3700 weekly downloads.
+Whenever I decide to use an open source library one of the first things I check for is community and activity. To my unexpected surprise React Data Table Component is gaining contributions and is already up to 200+ stars and 3700+ weekly downloads.
 
-While those numbers are nothing to brag about they are growing on a weekly basis, and that is motivating me to keep the features and bug fixes coming. More importantly, it's incredibly awesome to see others so eager to report bugs, suggest features and submit PR's.
+While those numbers are nothing to brag about compared to other libraries they are growing on a weekly basis, and that is motivating me to keep the features and bug fixes coming. More importantly it's incredibly awesome to see others so eager to report bugs, suggest features and submit PR's.
 
 ## Shut Up and Give Me React Data Table Component
 Anyway, I've gone on enough. You can read more about [React Data Table Component](https://github.com/jbetancur/react-data-table-component) and look over the API documentation for yourself.
